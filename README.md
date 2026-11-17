@@ -139,7 +139,7 @@ added, update `site` and `base` in `astro.config.mjs`. All internal links go thr
 
 - [x] Real bridges from the 2026–27 sponsorship packet (Pocoata, Tomata, Pilipilicito).
 - [ ] Confirm the full 2026 travel team (the packet only names Christina Ho and Jack Provost) and the build month.
-- [ ] Add the rest of the officers to `src/data/people.json`, with majors, grad years, headshots, and LinkedIn links.
+- [ ] Fill in `src/data/people.json` (it is empty on purpose, so the People page shows a placeholder until it has entries).
 - [ ] Confirm the committees in `src/data/committees.json` match how the chapter is actually organized.
 - [ ] Set `interestFormUrl` and the three social links in `src/data/site.json`.
 - [x] Homepage stats (3 bridges, about 475 people, about 25 members).

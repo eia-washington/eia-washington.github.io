@@ -1,9 +1,24 @@
 ---
 import Base from '../layouts/Base.astro';
 import PersonCard from '../components/PersonCard.astro';
-import people from '../data/people.json';
+import Photo from '../components/Photo.astro';
+import peopleData from '../data/people.json';
+import site from '../data/site.json';
+import { url } from '../lib/url';
+
+interface Person {
+  name: string;
+  role: string;
+  team?: string;
+  major?: string;
+  gradYear?: number | string;
+  photo?: string;
+  linkedin?: string;
+}
+const people = peopleData as Person[];
 
 // Group people by team, keeping the order teams first appear in people.json.
+// While people.json is empty, the page shows a short placeholder instead.
 const teams = [...new Set(people.map((p) => p.team || 'Members'))];
 ---
 
@@ -11,7 +26,26 @@ const teams = [...new Set(people.map((p) => p.team || 'Members'))];
   <section>
     <div class="wrap">
       <h1>The people behind the bridges</h1>
-      <p class="lede">These are the students who run the Washington Chapter of Engineers in Action this year.</p>
+      {
+        people.length > 0 ? (
+          <p class="lede">These are the students who run the Washington Chapter of Engineers in Action this year.</p>
+        ) : (
+          <div class="split placeholder">
+            <div>
+              <p class="lede">
+                We're putting together photos and profiles of this year's team, and they'll be
+                here soon. Until then, the best way to meet us is at a general meeting.
+              </p>
+              <p>{site.meetingInfo}</p>
+              <div class="actions">
+                <a class="btn" href={url('/join')}>See how to join</a>
+                <a class="text-link" href={`mailto:${site.email}`}>Email the team</a>
+              </div>
+            </div>
+            <Photo src="/images/bridges/pilipilicito-3.jpg" caption="The 2026 build team" tilt={2} ratio="4 / 3" />
+          </div>
+        )
+      }
     </div>
   </section>
 
@@ -35,6 +69,7 @@ const teams = [...new Set(people.map((p) => p.team || 'Members'))];
 
 <style>
   h1 { max-width: 12ch; }
+  .placeholder { margin-top: 24px; align-items: start; }
   .team { padding: clamp(40px, 6vw, 72px) 0; }
   .team h2 { font-size: var(--step-3); }
   .grid {
