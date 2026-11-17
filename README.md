@@ -17,7 +17,7 @@ the layout code to update the site.
 | --- | --- |
 | Chapter email, interest form link, socials, sponsor package link, homepage stats, tagline, hero photo, photo collage, sponsor page ("where your support goes", "what sponsors get") | `src/data/site.json` |
 | Team members (name, role, major, grad year, headshot, LinkedIn) | `src/data/people.json` |
-| Committees on the Join page (each can have a `photo`) | `src/data/committees.json` |
+| Teams on the Join page (each can have a `photo`) | `src/data/committees.json` |
 | "What a week looks like" on the Join page | `src/data/dayToDay.json` |
 | Past bridges (one file per bridge, shown at `/bridges`) | `src/content/projects/*.md` |
 
@@ -140,11 +140,11 @@ added, update `site` and `base` in `astro.config.mjs`. All internal links go thr
 - [x] Real bridges from the 2026–27 sponsorship packet (Pocoata, Tomata, Pilipilicito).
 - [ ] Confirm the full 2026 travel team (the packet only names Christina Ho and Jack Provost) and the build month.
 - [ ] Fill in `src/data/people.json` (it is empty on purpose, so the People page shows a placeholder until it has entries).
-- [ ] Confirm the committees in `src/data/committees.json` match how the chapter is actually organized.
+- [ ] Confirm the team descriptions and meeting times in `src/data/committees.json`.
 - [ ] Set `interestFormUrl` and the three social links in `src/data/site.json`.
 - [x] Homepage stats (3 bridges, about 475 people, about 25 members).
 - [x] Hero, gallery, and bridge photos from the sponsorship packet.
-- [ ] Committee photos and headshots.
+- [ ] Team photos and headshots.
 - [ ] Update `sponsorUses`, `sponsorTiers`, and `bridgeCost` in `site.json` each year from the new sponsorship packet.
 - [x] Public contact is uweiabridge@gmail.com (from the sponsorship packet).
 - [ ] Update `meetingInfo` in `site.json` if the meeting time or room changes.

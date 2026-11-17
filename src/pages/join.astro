@@ -15,11 +15,11 @@ const joinHref = formReady
 const joinLabel = formReady ? 'Fill out the interest form' : 'Email us to join';
 const socials = site.socials.filter((s) => isSet(s.url));
 const tilts = [-2, 2, -1.5, 2.5];
-// Committees show as staggered photo rows once they have photos, and as plain columns until then.
+// Teams show as staggered photo rows once they have photos, and as plain columns until then.
 const committeePhotos = committees.some((c) => c.photo);
 ---
 
-<Base title="Join the team" description="Join the Washington Chapter of Engineers in Action: what a year looks like, our committees, and how to get involved.">
+<Base title="Join the team" description="Join the Washington Chapter of Engineers in Action: what a year looks like, our teams, and how to get involved.">
   <section>
     <div class="wrap split">
       <div>
@@ -60,28 +60,30 @@ const committeePhotos = committees.some((c) => c.photo);
 
   <section>
     <div class="wrap">
-      <h2>Committees</h2>
-      <p class="lede">Most members join one committee, and you can switch at any time.</p>
+      <h2>Teams</h2>
+      <p class="lede">The main team designs the bridge, and the logistics team raises the money to build it.</p>
       {
         committeePhotos ? (
           <div class="stagger">
             {committees.map((c, i) => (
               <div class="stagger-row">
-                <Photo src={c.photo} caption={`The ${c.name.toLowerCase()} committee`} tilt={tilts[i % tilts.length]} ratio="3 / 2" />
+                <Photo src={c.photo} caption={c.name} tilt={tilts[i % tilts.length]} ratio="3 / 2" />
                 <div>
                   <h3>{c.name}</h3>
                   <p>{c.blurb}</p>
+                  {c.groups.length > 0 && <ul class="groups">{c.groups.map((g) => <li>{g}</li>)}</ul>}
                   {c.commitment && <p class="note">{c.commitment}</p>}
                 </div>
               </div>
             ))}
           </div>
         ) : (
-          <div class="columns four">
+          <div class="columns">
             {committees.map((c) => (
               <div>
                 <h3>{c.name}</h3>
                 <p>{c.blurb}</p>
+                {c.groups.length > 0 && <ul class="groups">{c.groups.map((g) => <li>{g}</li>)}</ul>}
                 {c.commitment && <p class="note commit">{c.commitment}</p>}
               </div>
             ))}
@@ -118,6 +120,9 @@ const committeePhotos = committees.some((c) => c.photo);
   h1 { max-width: 13ch; font-size: var(--step-4); }
   @media (min-width: 1000px) { .four { grid-template-columns: repeat(4, 1fr); } }
   .commit { margin-top: 12px; }
+  .groups { margin: 14px 0 0; padding-left: 1.1em; color: var(--steel); }
+  .groups li { margin: 6px 0; max-width: 46ch; }
+  .groups li::marker { color: var(--ink); }
   .hero-cutout { display: flex; justify-content: center; }
   .contact { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 18px 28px; margin-top: 16px; }
 </style>

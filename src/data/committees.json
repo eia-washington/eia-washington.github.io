@@ -1,26 +1,23 @@
 [
   {
-    "name": "Design",
-    "blurb": "The design committee surveys the site, runs the structural calculations, and produces the drawings that our partner engineers sign off on.",
-    "commitment": "about 4 hours a week",
+    "name": "Main team",
+    "blurb": "The main team learns suspended bridge design, designs the bridge, and writes the technical reports for each review call with Engineers in Action's engineers.",
+    "commitment": "Meets with the whole chapter on Wednesdays at 5:30 PM in CMU 230",
+    "groups": [],
     "photo": ""
   },
   {
-    "name": "Fundraising",
-    "blurb": "The fundraising committee writes grants, contacts sponsors, and runs our fundraisers, which include bake sales, a cherry blossom souvenir sale for campus visitors, a spring soccer tournament, and an online crowdfunding campaign.",
-    "commitment": "about 3 hours a week",
-    "photo": ""
-  },
-  {
-    "name": "Outreach",
-    "blurb": "The outreach committee runs our social media and recruits new members each quarter.",
-    "commitment": "about 2 hours a week",
-    "photo": ""
-  },
-  {
-    "name": "Logistics",
-    "blurb": "The logistics committee plans the build trip, which covers travel, health and safety, the budget, and coordination with our partners abroad.",
-    "commitment": "about 2 hours a week",
+    "name": "Logistics team",
+    "blurb": "The logistics team raises the money that gets each bridge built and runs the chapter's operations. You don't need any engineering background to join it, and members work in smaller groups.",
+    "commitment": "Meets on Mondays at 5:30 PM in MEB 237",
+    "groups": [
+      "Corporate sponsorships, which reaches out to companies and follows up with contacts from career fairs",
+      "Grants, where each member writes and submits grant applications",
+      "Events, which runs on-campus fundraisers such as bake sales and pizza sales",
+      "Product development, which designs and makes the souvenirs we sell during cherry blossom season",
+      "Love, The Ave, our sponsorship program with local businesses",
+      "Social media and marketing, which makes our posts, videos, and LinkedIn presence"
+    ],
     "photo": ""
   }
 ]
