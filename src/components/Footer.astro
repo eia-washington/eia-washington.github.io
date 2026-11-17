@@ -1,0 +1,79 @@
+---
+import { url } from '../lib/url';
+import site from '../data/site.json';
+const year = new Date().getFullYear();
+---
+
+<footer class="footer band-dark">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-tag">{site.tagline}</p>
+      <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
+      <ul class="socials">
+        {site.socials.map((s) => <li><a href={s.url} rel="noopener" target="_blank">{s.label}</a></li>)}
+      </ul>
+    </div>
+    <div>
+      <h4>explore</h4>
+      <ul>
+        <li><a href={url('/projects')}>past bridges</a></li>
+        <li><a href={url('/people')}>people</a></li>
+        <li><a href={url('/join')}>join the team</a></li>
+        <li><a href={url('/sponsor')}>sponsor us</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>get involved</h4>
+      <ul>
+        <li><a href={site.interestFormUrl} rel="noopener" target="_blank">interest form</a></li>
+        <li><a href={site.sponsorPackageUrl} rel="noopener" target="_blank">sponsorship package</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>© {year} {site.name}, {site.chapter}</span>
+    <span class="hand">see you on the bridge</span>
+  </div>
+</footer>
+
+<style>
+  .footer { padding: 64px 0 28px; }
+  .footer-grid {
+    display: grid;
+    gap: 36px;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 760px) {
+    .footer-grid { grid-template-columns: 2fr 1fr 1fr; }
+  }
+  .footer-tag {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    line-height: 1.2;
+    max-width: 22ch;
+  }
+  h4 {
+    font-family: var(--font-hand);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin: 0 0 8px;
+  }
+  ul { list-style: none; padding: 0; margin: 0; }
+  li { margin: 4px 0; }
+  a { text-decoration: none; }
+  a:hover { text-decoration: underline; color: var(--paper); }
+  .socials { display: flex; flex-wrap: wrap; gap: 16px; }
+  .footer-bottom {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 0.9rem;
+    opacity: 0.85;
+  }
+  .footer-bottom .hand { font-size: 1.4rem; }
+</style>

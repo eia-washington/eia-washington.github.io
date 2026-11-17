@@ -1,0 +1,86 @@
+---
+import Base from '../layouts/Base.astro';
+import site from '../data/site.json';
+import committees from '../data/committees.json';
+import dayToDay from '../data/dayToDay.json';
+---
+
+<Base title="Join the team" description="Join Engineers in Action at UW: what we do day to day, our committees, and how to get involved.">
+  <section>
+    <div class="wrap">
+      <span class="eyebrow">join the team</span>
+      <h1>come as you are.<br />build something real.</h1>
+      <p class="lede">
+        Any major, any year. Fill out the interest form and we'll reach out about the next
+        meeting.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href={site.interestFormUrl} target="_blank" rel="noopener">fill out the interest form</a>
+        <a class="btn" href={`mailto:${site.email}`}>email us</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <span class="eyebrow">day to day</span>
+      <h2>what a week looks like</h2>
+      <div class="cards">
+        {
+          dayToDay.map((d, i) => (
+            <div class="card">
+              <span class="num">{String(i + 1).padStart(2, '0')}</span>
+              <h3>{d.title}</h3>
+              <p>{d.text}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <span class="eyebrow">our committees</span>
+      <h2>find your corner</h2>
+      <p class="lede">Most members join one committee. You can switch any time.</p>
+      <div class="cards">
+        {
+          committees.map((c, i) => (
+            <div class="card">
+              <span class="num">{String(i + 1).padStart(2, '0')}</span>
+              <h3>{c.name}</h3>
+              <p>{c.blurb}</p>
+              {c.commitment && <p class="meta">{c.commitment}</p>}
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="band-dark">
+    <div class="wrap split">
+      <div>
+        <span class="eyebrow">questions?</span>
+        <h2>talk to us.</h2>
+        <p>
+          Email <a href={`mailto:${site.email}`}>{site.email}</a> or message us on
+          social media. We read everything.
+        </p>
+        <ul class="contact">
+          {site.socials.map((s) => <li><a href={s.url} target="_blank" rel="noopener">{s.label} ↗</a></li>)}
+        </ul>
+      </div>
+      <div>
+        <a class="btn" href={site.interestFormUrl} target="_blank" rel="noopener">interest form →</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  h1 { max-width: 16ch; }
+  .lede { margin-bottom: 28px; }
+  .contact { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 18px; }
+</style>

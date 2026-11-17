@@ -1,0 +1,112 @@
+---
+import { url } from '../lib/url';
+import site from '../data/site.json';
+
+const links = [
+  { href: '/projects', label: 'past bridges' },
+  { href: '/people', label: 'people' },
+  { href: '/join', label: 'join' },
+  { href: '/sponsor', label: 'sponsor', cta: true },
+];
+const current = Astro.url.pathname.replace(/\/$/, '');
+---
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href={url('/')}>
+      <span class="brand-mark">EIA</span>
+      <span class="brand-text">{site.chapter.replace(' Chapter', '')}</span>
+    </a>
+    <input type="checkbox" id="nav-toggle" class="sr-only" />
+    <label for="nav-toggle" class="nav-burger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </label>
+    <nav aria-label="Main">
+      <ul>
+        {
+          links.map((l) => (
+            <li>
+              <a
+                href={url(l.href)}
+                class:list={[{ cta: l.cta, active: current.endsWith(l.href) }]}
+              >
+                {l.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: color-mix(in srgb, var(--paper) 92%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 64px;
+  }
+  .brand {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .brand-mark {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--navy);
+  }
+  .brand-text {
+    font-family: var(--font-hand);
+    font-size: 1.35rem;
+    color: var(--accent);
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+  }
+  nav a {
+    display: block;
+    padding: 8px 14px;
+    border-radius: 999px;
+    text-decoration: none;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  nav a:hover, nav a.active { background: var(--paper-2); color: var(--ink); }
+  nav a.cta { background: var(--accent); color: #fff; }
+  nav a.cta:hover { background: var(--ink); }
+
+  .nav-burger { display: none; cursor: pointer; padding: 10px; }
+  .nav-burger span {
+    display: block; width: 22px; height: 2px; background: var(--ink); margin: 5px 0;
+  }
+
+  @media (max-width: 720px) {
+    .nav-burger { display: block; }
+    nav {
+      position: absolute;
+      top: 64px; left: 0; right: 0;
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+      display: none;
+    }
+    nav ul { flex-direction: column; padding: 12px var(--gutter) 20px; }
+    #nav-toggle:checked ~ nav { display: block; }
+  }
+</style>

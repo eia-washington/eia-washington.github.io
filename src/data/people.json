@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Firstname Lastname",
+    "role": "President",
+    "team": "Leadership",
+    "major": "Civil Engineering",
+    "gradYear": 2027,
+    "photo": "",
+    "linkedin": ""
+  },
+  {
+    "name": "Firstname Lastname",
+    "role": "Design Lead",
+    "team": "Design",
+    "major": "Civil Engineering",
+    "gradYear": 2028,
+    "photo": "",
+    "linkedin": ""
+  },
+  {
+    "name": "Firstname Lastname",
+    "role": "Fundraising Lead",
+    "team": "Fundraising",
+    "major": "Mechanical Engineering",
+    "gradYear": 2027,
+    "photo": "",
+    "linkedin": ""
+  },
+  {
+    "name": "Firstname Lastname",
+    "role": "Outreach Lead",
+    "team": "Outreach",
+    "major": "Industrial Engineering",
+    "gradYear": 2029,
+    "photo": "",
+    "linkedin": ""
+  }
+]

@@ -1,0 +1,44 @@
+---
+import Base from '../layouts/Base.astro';
+import PersonCard from '../components/PersonCard.astro';
+import people from '../data/people.json';
+
+// Group people by team, keeping the order teams first appear in people.json.
+const teams = [...new Set(people.map((p) => p.team || 'Members'))];
+---
+
+<Base title="People" description="Meet the students behind Engineers in Action at UW.">
+  <section>
+    <div class="wrap">
+      <span class="eyebrow">the team</span>
+      <h1>good people.<br />strong bridges.</h1>
+    </div>
+  </section>
+
+  {
+    teams.map((team, t) => (
+      <section class:list={['team', { band: t % 2 === 0 }]}>
+        <div class="wrap">
+          <h2>{team}</h2>
+          <div class="grid">
+            {people
+              .filter((p) => (p.team || 'Members') === team)
+              .map((p, i) => (
+                <PersonCard person={p} index={i} />
+              ))}
+          </div>
+        </div>
+      </section>
+    ))
+  }
+</Base>
+
+<style>
+  .team { padding: clamp(40px, 6vw, 72px) 0; }
+  .grid {
+    display: grid;
+    gap: 40px 24px;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    margin-top: 24px;
+  }
+</style>

@@ -1,0 +1,74 @@
+---
+// A "taped to the page" photo, scrapbook style.
+// If `src` is empty it shows a placeholder so pages still look right before real photos exist.
+import { url } from '../lib/url';
+
+interface Props {
+  src?: string;
+  alt?: string;
+  caption?: string;
+  tilt?: number;   // degrees, e.g. -2 or 3
+  tape?: boolean;
+  ratio?: string;  // CSS aspect-ratio, e.g. "4 / 3"
+}
+const { src = '', alt = '', caption, tilt = 0, tape = true, ratio = '4 / 3' } = Astro.props;
+---
+
+<figure class="photo" style={`--tilt:${tilt}deg; --ratio:${ratio}`}>
+  {tape && <span class="tape" aria-hidden="true"></span>}
+  {
+    src ? (
+      <img src={url(src)} alt={alt || caption || ''} loading="lazy" />
+    ) : (
+      <div class="placeholder" role="img" aria-label={alt || caption || 'photo coming soon'}>
+        <span>photo coming soon</span>
+      </div>
+    )
+  }
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style>
+  .photo {
+    margin: 0;
+    background: #fff;
+    padding: 10px 10px 14px;
+    box-shadow: 0 10px 24px -12px rgba(29, 36, 51, 0.35);
+    transform: rotate(var(--tilt));
+    position: relative;
+    transition: transform 0.2s ease;
+  }
+  .photo:hover { transform: rotate(0deg) scale(1.02); }
+  img, .placeholder {
+    width: 100%;
+    aspect-ratio: var(--ratio);
+    object-fit: cover;
+  }
+  .placeholder {
+    display: grid;
+    place-items: center;
+    background:
+      repeating-linear-gradient(45deg, var(--paper-2) 0 12px, var(--paper) 12px 24px);
+    color: var(--ink-soft);
+    font-family: var(--font-hand);
+    font-size: 1.4rem;
+  }
+  figcaption {
+    font-family: var(--font-hand);
+    font-size: 1.35rem;
+    color: var(--ink);
+    text-align: center;
+    margin-top: 8px;
+    line-height: 1.1;
+  }
+  .tape {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    width: 96px;
+    height: 26px;
+    transform: translateX(-50%) rotate(-3deg);
+    background: var(--tape);
+    z-index: 1;
+  }
+</style>

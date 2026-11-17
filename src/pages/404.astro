@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+import { url } from '../lib/url';
+---
+
+<Base title="Not found">
+  <section>
+    <div class="wrap">
+      <span class="eyebrow">404</span>
+      <h1>this bridge isn't built yet.</h1>
+      <p class="lede">The page you're looking for doesn't exist.</p>
+      <a class="btn btn-primary" href={url('/')}>back home</a>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,21 @@
+{
+  "name": "Engineers in Action",
+  "chapter": "University of Washington Chapter",
+  "shortName": "EIA UW",
+  "tagline": "we build footbridges with communities that need them.",
+  "purpose": "Engineers in Action at UW is a student team that designs and builds pedestrian footbridges alongside rural communities cut off from schools, clinics, and markets by rivers that flood each rainy season. We spend the year designing, fundraising, and preparing, then travel to build the bridge with the community.",
+  "email": "eiauw@uw.edu",
+  "interestFormUrl": "https://forms.gle/REPLACE_ME",
+  "sponsorPackageUrl": "https://canva.link/sponsor-eia-uw",
+  "sponsorPackageEmbedUrl": "",
+  "socials": [
+    { "label": "Instagram", "url": "https://instagram.com/REPLACE_ME" },
+    { "label": "LinkedIn", "url": "https://linkedin.com/company/REPLACE_ME" },
+    { "label": "YouTube", "url": "https://youtube.com/@REPLACE_ME" }
+  ],
+  "stats": [
+    { "value": "0", "label": "bridges built" },
+    { "value": "0", "label": "people served" },
+    { "value": "0", "label": "members" }
+  ]
+}
