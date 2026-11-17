@@ -3,10 +3,10 @@ import { url } from '../lib/url';
 import site from '../data/site.json';
 
 const links = [
-  { href: '/bridges', label: 'past bridges' },
-  { href: '/people', label: 'people' },
-  { href: '/join', label: 'join' },
-  { href: '/sponsor', label: 'sponsor', cta: true },
+  { href: '/bridges', label: 'Past bridges' },
+  { href: '/people', label: 'People' },
+  { href: '/join', label: 'Join' },
+  { href: '/sponsor', label: 'Sponsor', cta: true },
 ];
 const current = Astro.url.pathname.replace(/\/$/, '');
 ---
@@ -15,7 +15,7 @@ const current = Astro.url.pathname.replace(/\/$/, '');
   <div class="wrap nav-inner">
     <a class="brand" href={url('/')}>
       <span class="brand-mark">EIA</span>
-      <span class="brand-text">{site.chapter.replace(' Chapter', '')}</span>
+      <span class="brand-text">University of Washington</span>
     </a>
     <input type="checkbox" id="nav-toggle" class="sr-only" />
     <label for="nav-toggle" class="nav-burger" aria-label="Toggle menu">
@@ -61,16 +61,17 @@ const current = Astro.url.pathname.replace(/\/$/, '');
     text-decoration: none;
     color: var(--ink);
   }
+  .brand:hover { background: none; }
   .brand-mark {
     font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 1.5rem;
-    color: var(--navy);
+    font-weight: 500;
+    font-size: 1.6rem;
+    letter-spacing: -0.02em;
   }
   .brand-text {
     font-family: var(--font-hand);
-    font-size: 1.35rem;
-    color: var(--accent);
+    font-size: 1.05rem;
+    color: var(--steel);
   }
   nav ul {
     list-style: none;
@@ -86,9 +87,7 @@ const current = Astro.url.pathname.replace(/\/$/, '');
     color: var(--ink);
     font-family: var(--font-display);
     font-size: 1.15rem;
-    letter-spacing: -0.02em;
   }
-  nav a:hover { color: var(--accent); }
   nav a.active { text-decoration: underline; text-decoration-thickness: 1.5px; }
 
   .nav-burger { display: none; cursor: pointer; padding: 10px; }

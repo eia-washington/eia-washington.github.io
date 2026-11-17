@@ -1,24 +1,31 @@
 /* ------------------------------------------------------------------
    Design tokens. Change colors and fonts here; everything else follows.
+   Theme: an engineer's field notebook. Survey paper, river-blue ink,
+   steel gray, and safety-yellow highlighter as the only accent.
    ------------------------------------------------------------------ */
 :root {
-  --paper: #f6f1e7;        /* warm off-white background */
-  --paper-2: #ece4d3;      /* slightly darker paper for bands */
-  --ink: #1d2433;          /* main text */
-  --ink-soft: #4b5468;
-  --navy: #1f3a5f;         /* primary */
-  --accent: #e8743b;       /* warm orange accent */
-  --accent-ink: #ffffff;
-  --tape: rgba(240, 214, 140, 0.75);
-  --line: #d8ceb8;
+  --paper: #ecebe6;        /* survey paper (page background) */
+  --concrete: #dad8d1;     /* alternate section background */
+  --ink: #16324a;          /* river blue: text, primary buttons, drawings */
+  --steel: #5d6a73;        /* secondary text */
+  --yellow: #f2c230;       /* safety yellow: highlighter, focus */
+  --white: #fbfaf7;        /* photo borders */
+  --line: #c4c1b8;
 
-  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-display: 'Fraunces', Georgia, serif;
-  --font-hand: 'Caveat', 'Segoe Print', cursive;
+  --font-display: 'Bodoni Moda', 'Didot', Georgia, serif;
+  --font-body: 'IBM Plex Sans', system-ui, 'Segoe UI', sans-serif;
+  --font-hand: 'Architects Daughter', 'Segoe Print', cursive;
 
-  --radius: 6px;
   --max: 1120px;
-  --gutter: clamp(16px, 4vw, 40px);
+  --gutter: clamp(18px, 4vw, 40px);
+
+  /* Type scale (perfect fourth, 1.333) */
+  --step-0: 1.0625rem;
+  --step-1: 1.333rem;
+  --step-2: 1.777rem;
+  --step-3: clamp(2rem, 4vw, 2.75rem);
+  --step-4: clamp(2.5rem, 6vw, 4rem);
+  --step-5: clamp(3rem, 8.5vw, 6.25rem);
 }
 
 *,
@@ -32,30 +39,34 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-body);
-  font-size: 1.0625rem;
+  font-size: var(--step-0);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 
 img { max-width: 100%; display: block; }
 
-a { color: var(--navy); text-underline-offset: 3px; }
-a:hover { color: var(--accent); }
+a { color: var(--ink); text-decoration-thickness: 1.5px; text-underline-offset: 4px; }
+a:hover { background: linear-gradient(transparent 60%, var(--yellow) 60%); }
+
+:focus-visible {
+  outline: 3px solid var(--yellow);
+  outline-offset: 3px;
+}
 
 h1, h2, h3 {
   font-family: var(--font-display);
   font-weight: 400;
-  font-variation-settings: 'opsz' 144;
   line-height: 1.05;
-  letter-spacing: -0.03em;
-  margin: 0 0 0.5em;
-  text-transform: lowercase;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.45em;
+  text-wrap: balance;
 }
-h1 { font-size: clamp(2.8rem, 7.5vw, 5.8rem); font-weight: 300; }
-h2 { font-size: clamp(2rem, 4.5vw, 3.2rem); }
-h3 { font-size: 1.6rem; letter-spacing: -0.02em; }
+h1 { font-size: var(--step-5); letter-spacing: -0.035em; }
+h2 { font-size: var(--step-4); letter-spacing: -0.03em; }
+h3 { font-size: var(--step-2); }
 
-p { margin: 0 0 1em; }
+p { margin: 0 0 1em; max-width: 64ch; }
 
 .wrap {
   width: 100%;
@@ -64,93 +75,66 @@ p { margin: 0 0 1em; }
   padding: 0 var(--gutter);
 }
 
-section { padding: clamp(56px, 9vw, 112px) 0; }
-.band { background: var(--paper-2); }
-.band-dark { background: var(--navy); color: var(--paper); }
-.band-dark a { color: var(--paper); }
-.band-dark h2 { color: var(--paper); }
+main > section { padding: clamp(64px, 10vw, 128px) 0; }
+.band { background: var(--concrete); }
 
-/* Handwritten note, e.g. <span class="hand">that's us!</span> */
-.hand {
+.lede { font-size: var(--step-1); line-height: 1.5; color: var(--steel); max-width: 44ch; }
+
+/* A handwritten margin note, like a pencil annotation on a drawing.
+   Use only for notes that add information (a time commitment, a caption). */
+.note {
   font-family: var(--font-hand);
-  font-size: 1.6em;
-  line-height: 1;
-  color: var(--accent);
-  font-weight: 600;
+  font-size: 1.15rem;
+  color: var(--steel);
+  line-height: 1.3;
 }
-
-.eyebrow {
-  font-family: var(--font-hand);
-  font-size: 1.7rem;
-  color: var(--accent);
-  margin: 0 0 0.25rem;
-  display: block;
-}
-
-.lede { font-size: 1.25rem; color: var(--ink-soft); max-width: 46ch; }
-
-/* Buttons */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5em;
-  padding: 0.8em 1.4em;
-  border-radius: 999px;
-  border: 2px solid var(--ink);
-  background: transparent;
-  color: var(--ink);
-  font-weight: 600;
-  text-decoration: none;
-  text-transform: lowercase;
-  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
-}
-.btn:hover { transform: translateY(-2px) rotate(-1deg); color: var(--ink); background: var(--paper-2); }
-.btn-primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
-.btn-primary:hover { background: var(--ink); border-color: var(--ink); color: var(--paper); }
-.band-dark .btn { border-color: var(--paper); color: var(--paper); }
-.band-dark .btn:hover { background: var(--paper); color: var(--navy); }
-
-.btn-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; }
-
-/* Underlined text link with an arrow, cseed-style. Use for secondary actions;
-   keep .btn-primary for the one main action on a section. */
-.link-arrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4em;
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  letter-spacing: -0.01em;
-  color: var(--ink);
-  text-decoration: none;
-  border-bottom: 1.5px solid currentColor;
-  padding-bottom: 2px;
-  text-transform: lowercase;
-  transition: color 0.15s ease, gap 0.15s ease;
-}
-.link-arrow::after { content: '↗'; font-family: var(--font-body); font-size: 0.9em; }
-.link-arrow.down::after { content: '↓'; }
-.link-arrow.right::after { content: '→'; }
-.link-arrow:hover { color: var(--accent); gap: 0.6em; }
-.on-photo .link-arrow, .band-dark .link-arrow { color: var(--paper); }
-.on-photo .link-arrow:hover, .band-dark .link-arrow:hover { color: var(--tape); }
 
 /* Highlighter mark behind a word, e.g. <span class="mark">sponsor</span> */
 .mark {
-  background: linear-gradient(transparent 55%, var(--tape) 55%, var(--tape) 92%, transparent 92%);
-  padding: 0 0.15em;
+  background: linear-gradient(transparent 55%, var(--yellow) 55%, var(--yellow) 90%, transparent 90%);
+  padding: 0 0.12em;
 }
 
-/* Sticker-style cutout: a transparent PNG with a white outline and soft shadow. */
-.sticker {
-  filter:
-    drop-shadow(3px 0 0 #fff) drop-shadow(-3px 0 0 #fff)
-    drop-shadow(0 3px 0 #fff) drop-shadow(0 -3px 0 #fff)
-    drop-shadow(0 12px 14px rgba(29, 36, 51, 0.28));
+/* Actions: one filled button per section for the main action; text links for the rest. */
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 30px; margin-top: 28px; }
+.btn {
+  display: inline-block;
+  padding: 0.85em 1.5em;
+  background: var(--ink);
+  color: var(--paper);
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 2px;
+}
+.btn:hover { background: var(--ink); color: var(--yellow); }
+.text-link {
+  font-weight: 500;
+  text-decoration: underline;
 }
 
-/* Staggered rows: big tilted photo on one side, text on the other, alternating. */
-.stagger { display: grid; gap: clamp(56px, 9vw, 112px); margin-top: 48px; }
+/* Plain columns for short parallel items (no boxes). */
+.columns {
+  display: grid;
+  gap: 32px clamp(24px, 4vw, 56px);
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  margin-top: 40px;
+}
+.columns h3 { font-size: var(--step-2); }
+.columns p { color: var(--steel); margin: 0; }
+
+/* Two-column split that stacks on phones */
+.split {
+  display: grid;
+  gap: clamp(32px, 6vw, 80px);
+  grid-template-columns: 1fr;
+  align-items: center;
+}
+@media (min-width: 860px) {
+  .split { grid-template-columns: 1.1fr 0.9fr; }
+}
+
+/* Staggered rows: a large tilted photo on one side, text on the other, alternating. */
+.stagger { display: grid; gap: clamp(64px, 9vw, 120px); margin-top: 56px; }
 .stagger-row {
   display: grid;
   gap: clamp(24px, 5vw, 64px);
@@ -162,66 +146,19 @@ section { padding: clamp(56px, 9vw, 112px) 0; }
   .stagger-row:nth-child(even) { grid-template-columns: 0.85fr 1.15fr; }
   .stagger-row:nth-child(even) > :first-child { order: 2; }
 }
-.stagger-row .num {
-  font-family: var(--font-hand);
-  font-size: 1.8rem;
-  color: var(--accent);
-  display: block;
-  line-height: 1;
-}
-.stagger-row h3 { font-size: clamp(2.2rem, 4.5vw, 3.4rem); font-weight: 300; margin: 4px 0 12px; }
-.stagger-row p { color: var(--ink-soft); max-width: 38ch; }
-.stagger-row .meta { color: var(--navy); font-weight: 600; font-size: 0.95rem; }
+.stagger-row h3 { font-size: var(--step-3); margin-bottom: 12px; }
+.stagger-row p { color: var(--steel); max-width: 40ch; }
 
-/* Numbered cards, cseed-style */
-.cards {
-  display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-}
-.card {
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 28px 24px;
-  position: relative;
-}
-.card .num {
-  font-family: var(--font-hand);
-  font-size: 2.2rem;
-  color: var(--accent);
-  line-height: 1;
-  display: block;
-  margin-bottom: 8px;
-}
-.card h3 { margin-bottom: 0.4em; }
-.card p { color: var(--ink-soft); margin: 0; }
-.card .meta { margin-top: 12px; font-size: 0.9rem; color: var(--navy); font-weight: 600; }
-
-/* Stats */
-.stats { display: flex; flex-wrap: wrap; gap: clamp(24px, 6vw, 72px); }
-.stat strong {
-  display: block;
-  font-family: var(--font-display);
-  font-size: clamp(2.6rem, 6vw, 4rem);
-  line-height: 1;
-}
-.stat span { font-family: var(--font-hand); font-size: 1.5rem; color: var(--accent); }
-
-/* Two-column split that stacks on phones */
-.split {
-  display: grid;
-  gap: clamp(32px, 6vw, 72px);
-  grid-template-columns: 1fr;
-  align-items: center;
-}
-@media (min-width: 860px) {
-  .split { grid-template-columns: 1.1fr 0.9fr; }
-  .split.reverse > :first-child { order: 2; }
+/* Sticker-style cutout: a transparent PNG with a white outline and soft shadow. */
+.sticker {
+  filter:
+    drop-shadow(3px 0 0 var(--white)) drop-shadow(-3px 0 0 var(--white))
+    drop-shadow(0 3px 0 var(--white)) drop-shadow(0 -3px 0 var(--white))
+    drop-shadow(0 12px 14px rgba(22, 50, 74, 0.25));
 }
 
-.prose { max-width: 68ch; }
-.prose h2 { font-size: 2rem; margin-top: 1.5em; }
+.prose { max-width: 66ch; }
+.prose p { line-height: 1.7; }
 
 .sr-only {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
@@ -230,5 +167,5 @@ section { padding: clamp(56px, 9vw, 112px) 0; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  * { transition: none !important; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
 }

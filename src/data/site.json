@@ -2,9 +2,9 @@
   "name": "Engineers in Action",
   "chapter": "University of Washington Chapter",
   "shortName": "EIA UW",
-  "tagline": "We design and build footbridges with communities that need them.",
+  "tagline": "We're UW students who design footbridges for communities that rivers cut off, and then we travel to build them with the people who will use them.",
   "footerLine": "Footbridges designed by UW students and built with the communities that use them.",
-  "purpose": "Engineers in Action at UW is a student team that designs and builds pedestrian footbridges with rural communities that rivers cut off from schools, clinics, and markets. We spend the year designing, fundraising, and preparing, then travel to build the bridge alongside the community.",
+  "purpose": "Engineers in Action at UW is a student team that designs pedestrian footbridges for rural communities that rivers cut off from schools, clinics, and markets. We spend the school year on design, fundraising, and planning, and then a group of us travels to build the bridge with the community.",
   "email": "eiauw@uw.edu",
   "interestFormUrl": "https://forms.gle/REPLACE_ME",
   "sponsorPackageUrl": "https://canva.link/sponsor-eia-uw",
@@ -13,42 +13,75 @@
   "heroImageAlt": "The EIA UW team on a finished footbridge",
   "joinCutout": "",
   "socials": [
-    { "label": "Instagram", "url": "https://instagram.com/REPLACE_ME" },
-    { "label": "LinkedIn", "url": "https://linkedin.com/company/REPLACE_ME" },
-    { "label": "YouTube", "url": "https://youtube.com/@REPLACE_ME" }
+    {
+      "label": "Instagram",
+      "url": "https://instagram.com/REPLACE_ME"
+    },
+    {
+      "label": "LinkedIn",
+      "url": "https://linkedin.com/company/REPLACE_ME"
+    },
+    {
+      "label": "YouTube",
+      "url": "https://youtube.com/@REPLACE_ME"
+    }
   ],
   "stats": [
-    { "value": "0", "label": "bridges built" },
-    { "value": "0", "label": "people served" },
-    { "value": "0", "label": "members" }
+    {
+      "value": "0",
+      "phrase": "built {value} bridges"
+    },
+    {
+      "value": "0",
+      "phrase": "served about {value} people"
+    },
+    {
+      "value": "0",
+      "phrase": "grown to {value} members"
+    }
   ],
   "gallery": [
-    { "src": "", "caption": "site survey" },
-    { "src": "", "caption": "general meeting" },
-    { "src": "", "caption": "mixing concrete" },
-    { "src": "", "caption": "first walk across" },
-    { "src": "", "caption": "the travel team" }
+    {
+      "src": "",
+      "caption": "Site survey"
+    },
+    {
+      "src": "",
+      "caption": "General meeting"
+    },
+    {
+      "src": "",
+      "caption": "Mixing concrete"
+    },
+    {
+      "src": "",
+      "caption": "First walk across"
+    },
+    {
+      "src": "",
+      "caption": "The travel team"
+    }
   ],
   "sponsorUses": [
     {
-      "title": "materials",
+      "title": "Materials",
       "text": "Cable, steel, cement, and lumber make up most of what a footbridge costs.",
       "share": ""
     },
     {
-      "title": "travel",
-      "text": "Flights, lodging, and transport get the student build team to the community and back.",
+      "title": "Travel",
+      "text": "Flights, lodging, and local transport get the student build team to the community and back.",
       "share": ""
     },
     {
-      "title": "tools and safety",
-      "text": "Hand tools, harnesses, and site safety gear are bought for the build and reused on later trips.",
+      "title": "Tools and safety gear",
+      "text": "We buy hand tools, harnesses, and site safety equipment for each build and reuse them on later trips.",
       "share": ""
     }
   ],
   "sponsorBenefits": [
-    "Your logo on this site and in our sponsorship materials.",
-    "A chance to recruit from a team of UW engineering students who have designed and built real infrastructure.",
-    "Photos and updates from the build trip that you can share with your own team."
+    "We put your logo on this site and in our sponsorship materials.",
+    "You can recruit from a team of UW engineering students who have designed and built real infrastructure.",
+    "We send you photos and updates from the build trip that you can share with your own team."
   ]
 }

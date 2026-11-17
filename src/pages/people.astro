@@ -10,8 +10,8 @@ const teams = [...new Set(people.map((p) => p.team || 'Members'))];
 <Base title="People" description="Meet the students behind Engineers in Action at UW.">
   <section>
     <div class="wrap">
-      <span class="eyebrow">the team</span>
-      <h1>the people<br />behind the bridges.</h1>
+      <h1>The people behind the bridges</h1>
+      <p class="lede">These are the students who run Engineers in Action at UW this year, grouped by committee.</p>
     </div>
   </section>
 
@@ -34,7 +34,9 @@ const teams = [...new Set(people.map((p) => p.team || 'Members'))];
 </Base>
 
 <style>
+  h1 { max-width: 12ch; }
   .team { padding: clamp(40px, 6vw, 72px) 0; }
+  .team h2 { font-size: var(--step-3); }
   .grid {
     display: grid;
     gap: 40px 24px;

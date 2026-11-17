@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import Photo from '../../components/Photo.astro';
 import { getCollection, render } from 'astro:content';
 import { url } from '../../lib/url';
+import { listJoin, projectSentence } from '../../lib/text';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
@@ -18,15 +19,10 @@ const tilts = [-2, 1.5, -1, 2.5];
 <Base title={d.title} description={d.summary}>
   <section>
     <div class="wrap">
-      <a class="back" href={url('/bridges')}>← all bridges</a>
-      <span class="eyebrow">{d.date.toLocaleDateString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' })}</span>
+      <a class="back text-link" href={url('/bridges')}>All past bridges</a>
       <h1>{d.title}</h1>
-      <p class="lede">{d.community}, {d.country}</p>
-      <div class="stats">
-        {d.peopleServed && <div class="stat"><strong>{d.peopleServed.toLocaleString()}</strong><span>people served</span></div>}
-        {d.spanMeters && <div class="stat"><strong>{d.spanMeters}m</strong><span>span</span></div>}
-        {d.travelers.length > 0 && <div class="stat"><strong>{d.travelers.length}</strong><span>students traveled</span></div>}
-      </div>
+      <p class="note">{d.community}, {d.country}, {d.date.toLocaleDateString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' })}</p>
+      <p class="lede">{projectSentence({ ...d, travelers: [] })}</p>
     </div>
   </section>
 
@@ -54,7 +50,7 @@ const tilts = [-2, 1.5, -1, 2.5];
           {d.quotes.map((q) => (
             <blockquote>
               <p>“{q.text}”</p>
-              <cite><span class="hand">{q.name}</span>{q.role && <small>{q.role}</small>}</cite>
+              <cite>{q.name}{q.role && <span>{q.role}</span>}</cite>
             </blockquote>
           ))}
         </div>
@@ -66,8 +62,8 @@ const tilts = [-2, 1.5, -1, 2.5];
     d.travelers.length > 0 && (
       <section>
         <div class="wrap">
-          <span class="eyebrow">the travel team</span>
-          <p class="lede">{d.travelers.join(', ')}</p>
+          <h2>The travel team</h2>
+          <p class="lede">{listJoin(d.travelers)} traveled to build this bridge.</p>
         </div>
       </section>
     )
@@ -75,28 +71,22 @@ const tilts = [-2, 1.5, -1, 2.5];
 </Base>
 
 <style>
-  .back { display: inline-block; margin-bottom: 24px; text-decoration: none; font-weight: 600; }
-  .lede { margin-bottom: 28px; }
+  .back { display: inline-block; margin-bottom: 28px; }
+  h1 { max-width: 14ch; }
+  .note { margin-bottom: 20px; }
   .photos {
     display: grid;
     gap: 28px;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   }
-  .summary { font-size: 1.3rem; font-family: var(--font-display); line-height: 1.4; }
+  .summary { font-size: var(--step-1); font-family: var(--font-display); line-height: 1.45; }
   .quotes {
     display: grid;
     gap: 24px;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
-  blockquote {
-    margin: 0;
-    padding: 24px;
-    background: #fff;
-    border-left: 4px solid var(--accent);
-    border-radius: var(--radius);
-  }
-  blockquote p { font-family: var(--font-display); font-size: 1.25rem; line-height: 1.35; }
-  cite { font-style: normal; display: flex; flex-direction: column; }
-  cite .hand { font-size: 1.5rem; }
-  cite small { color: var(--ink-soft); }
+  blockquote { margin: 0; padding-left: 20px; border-left: 3px solid var(--yellow); }
+  blockquote p { font-family: var(--font-display); font-size: var(--step-1); line-height: 1.4; margin-bottom: 8px; }
+  cite { font-style: normal; font-weight: 500; display: flex; flex-direction: column; }
+  cite span { font-weight: 400; color: var(--steel); font-size: 0.95rem; }
 </style>

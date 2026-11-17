@@ -23,7 +23,7 @@ const initials = person.name
   .toUpperCase();
 // Transparent PNG headshots (background removed) render as stickers instead of framed squares.
 const isCutout = /\.png$/i.test(person.photo || '');
-const yr = person.gradYear ? `'${String(person.gradYear).slice(-2)}` : '';
+const meta = [person.major, person.gradYear && `class of ${person.gradYear}`].filter(Boolean).join(', ');
 ---
 
 <article class="person">
@@ -37,15 +37,12 @@ const yr = person.gradYear ? `'${String(person.gradYear).slice(-2)}` : '';
     }
   </div>
   <h3>{person.name}</h3>
-  <p class="role hand">{person.role}</p>
-  <p class="meta">
-    {person.major}{yr && ` · ${yr}`}
-    {person.team && <><br />{person.team}</>}
-  </p>
+  <p class="role note">{person.role}</p>
+  {meta && <p class="meta">{meta}</p>}
   {
     person.linkedin && (
       <a class="li" href={person.linkedin} target="_blank" rel="noopener">
-        LinkedIn ↗
+        LinkedIn
       </a>
     )
   }
@@ -58,13 +55,11 @@ const yr = person.gradYear ? `'${String(person.gradYear).slice(-2)}` : '';
     max-width: 220px;
     aspect-ratio: 1;
     margin: 0 auto 16px;
-    background: #fff;
+    background: var(--white);
     padding: 8px;
     transform: rotate(var(--tilt));
-    box-shadow: 0 10px 22px -12px rgba(29, 36, 51, 0.4);
-    transition: transform 0.2s ease;
+    box-shadow: 0 10px 22px -12px rgba(22, 50, 74, 0.4);
   }
-  .person:hover .cutout { transform: rotate(0deg); }
   .cutout.is-sticker { background: none; padding: 0; box-shadow: none; }
   .cutout.is-sticker img { object-fit: contain; object-position: bottom; filter: none; }
   .cutout img, .initials {
@@ -77,13 +72,13 @@ const yr = person.gradYear ? `'${String(person.gradYear).slice(-2)}` : '';
   .initials {
     display: grid;
     place-items: center;
-    background: var(--paper-2);
+    background: var(--concrete);
     font-family: var(--font-display);
     font-size: 3rem;
-    color: var(--navy);
+    color: var(--ink);
   }
-  h3 { font-size: 1.25rem; margin: 0; text-transform: none; }
-  .role { margin: 2px 0 6px; font-size: 1.45rem; }
-  .meta { font-size: 0.95rem; color: var(--ink-soft); margin: 0 0 6px; }
-  .li { font-size: 0.9rem; font-weight: 600; }
+  h3 { font-size: 1.4rem; margin: 0; }
+  .role { margin: 4px auto 4px; color: var(--ink); }
+  .meta { font-size: 0.95rem; color: var(--steel); margin: 0 auto 6px; }
+  .li { font-size: 0.95rem; font-weight: 500; }
 </style>

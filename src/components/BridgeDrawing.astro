@@ -1,0 +1,70 @@
+---
+// Line drawing of a cable suspension footbridge, annotated like a field sketch.
+// The main cable draws itself once on page load (skipped when reduced motion is on).
+interface Props {
+  span?: number; // meters, shown in the dimension note
+}
+const { span } = Astro.props;
+
+// Hangers between the towers, hung from the parabolic main cable.
+const towerL = 140;
+const towerR = 1060;
+const top = 60;
+const sag = 120;
+const deck = 230;
+const hangers = Array.from({ length: 21 }, (_, i) => {
+  const x = towerL + ((towerR - towerL) * (i + 1)) / 22;
+  const t = (x - towerL) / (towerR - towerL);
+  const y = top + sag * 4 * t * (1 - t);
+  return { x, y };
+});
+---
+
+<svg class="bridge" viewBox="0 0 1200 340" role="img" aria-label="Sketch of a cable suspension footbridge over a river">
+  <!-- banks -->
+  <path class="ground" d="M0 250 L120 236 L170 250 M1030 250 L1080 236 L1200 250" />
+  <!-- river -->
+  <path class="water" d="M190 292 q30 -8 60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0" />
+  <path class="water" d="M260 312 q30 -8 60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0" />
+  <!-- towers -->
+  <path class="steel" d={`M${towerL} ${deck + 8} V${top - 8} M${towerR} ${deck + 8} V${top - 8}`} />
+  <!-- backstays to anchors -->
+  <path class="steel thin" d={`M${towerL} ${top} L40 244 M${towerR} ${top} L1160 244`} />
+  <!-- deck -->
+  <path class="steel" d={`M${towerL - 30} ${deck} H${towerR + 30}`} />
+  <!-- hangers -->
+  {hangers.map((h) => <path class="steel thin" d={`M${h.x} ${h.y} V${deck}`} />)}
+  <!-- main cable (animated) -->
+  <path class="cable" pathLength="1" d={`M${towerL} ${top} Q${(towerL + towerR) / 2} ${top + sag * 2} ${towerR} ${top}`} />
+
+  <!-- dimension line and notes -->
+  <path class="dim" d={`M${towerL} 270 V282 M${towerR} 270 V282 M${towerL} 276 H${towerR}`} />
+  {span && <text class="note-text" x="600" y="268" text-anchor="middle">span ≈ {span} m</text>}
+  <text class="note-text" x="1100" y="320" text-anchor="end">the river</text>
+</svg>
+
+<style>
+  .bridge { width: 100%; height: auto; overflow: visible; }
+  path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .steel { stroke: currentColor; stroke-width: 3; }
+  .thin { stroke-width: 1.5; opacity: 0.7; }
+  .ground { stroke: currentColor; stroke-width: 2; opacity: 0.55; }
+  .water { stroke: currentColor; stroke-width: 1.5; opacity: 0.35; }
+  .dim { stroke: currentColor; stroke-width: 1; opacity: 0.6; }
+  .cable {
+    stroke: var(--yellow);
+    stroke-width: 5;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: draw 1.6s 0.3s cubic-bezier(0.6, 0, 0.3, 1) forwards;
+  }
+  .note-text {
+    font-family: var(--font-hand);
+    font-size: 22px;
+    fill: currentColor;
+  }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @media (prefers-reduced-motion: reduce) {
+    .cable { stroke-dashoffset: 0; }
+  }
+</style>

@@ -4,7 +4,7 @@ import site from '../data/site.json';
 const year = new Date().getFullYear();
 ---
 
-<footer class="footer band-dark">
+<footer class="footer">
   <div class="wrap footer-grid">
     <div>
       <p class="footer-tag">{site.footerLine}</p>
@@ -14,25 +14,25 @@ const year = new Date().getFullYear();
       </ul>
     </div>
     <div>
-      <h4>explore</h4>
+      <h2 class="col-head">Pages</h2>
       <ul>
-        <li><a href={url('/bridges')}>past bridges</a></li>
-        <li><a href={url('/people')}>people</a></li>
-        <li><a href={url('/join')}>join the team</a></li>
-        <li><a href={url('/sponsor')}>sponsor us</a></li>
+        <li><a href={url('/bridges')}>Past bridges</a></li>
+        <li><a href={url('/people')}>People</a></li>
+        <li><a href={url('/join')}>Join the team</a></li>
+        <li><a href={url('/sponsor')}>Sponsor us</a></li>
       </ul>
     </div>
     <div>
-      <h4>get involved</h4>
+      <h2 class="col-head">Links</h2>
       <ul>
-        {isSet(site.interestFormUrl) && <li><a href={site.interestFormUrl} rel="noopener" target="_blank">interest form</a></li>}
-        <li><a href={site.sponsorPackageUrl} rel="noopener" target="_blank">sponsorship package</a></li>
+        {isSet(site.interestFormUrl) && <li><a href={site.interestFormUrl} rel="noopener" target="_blank">Interest form</a></li>}
+        <li><a href={site.sponsorPackageUrl} rel="noopener" target="_blank">Sponsorship package</a></li>
       </ul>
     </div>
   </div>
   <div class="wrap footer-bottom">
     <span>© {year} {site.name}, {site.chapter}</span>
-    <span class="hand">see you on the bridge</span>
+    <span class="note">See you on the bridge.</span>
   </div>
 </footer>
 
@@ -51,19 +51,20 @@ const year = new Date().getFullYear();
     font-size: 1.6rem;
     line-height: 1.2;
     max-width: 26ch;
-    font-weight: 300;
   }
-  h4 {
+  .footer { background: var(--ink); color: var(--paper); }
+  .footer a { color: var(--paper); }
+  .footer a:hover { background: none; color: var(--yellow); }
+  .col-head {
     font-family: var(--font-hand);
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--accent);
+    font-size: 1.1rem;
+    letter-spacing: 0;
+    color: var(--yellow);
     margin: 0 0 8px;
   }
   ul { list-style: none; padding: 0; margin: 0; }
   li { margin: 4px 0; }
   a { text-decoration: none; }
-  a:hover { text-decoration: underline; color: var(--paper); }
   .socials { display: flex; flex-wrap: wrap; gap: 16px; }
   .footer-bottom {
     margin-top: 48px;
@@ -76,5 +77,5 @@ const year = new Date().getFullYear();
     font-size: 0.9rem;
     opacity: 0.85;
   }
-  .footer-bottom .hand { font-size: 1.4rem; }
+  .footer-bottom .note { color: var(--paper); }
 </style>

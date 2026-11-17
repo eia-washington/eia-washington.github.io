@@ -20,8 +20,8 @@ const { src = '', alt = '', caption, tilt = 0, tape = true, ratio = '4 / 3' } = 
     src ? (
       <img src={url(src)} alt={alt || caption || ''} loading="lazy" />
     ) : (
-      <div class="placeholder" role="img" aria-label={alt || caption || 'photo coming soon'}>
-        <span>photo coming soon</span>
+      <div class="placeholder" role="img" aria-label={alt || caption || 'Photo coming soon'}>
+        <span>Photo coming soon</span>
       </div>
     )
   }
@@ -31,14 +31,12 @@ const { src = '', alt = '', caption, tilt = 0, tape = true, ratio = '4 / 3' } = 
 <style>
   .photo {
     margin: 0;
-    background: #fff;
+    background: var(--white);
     padding: 10px 10px 14px;
-    box-shadow: 0 10px 24px -12px rgba(29, 36, 51, 0.35);
+    box-shadow: 0 12px 24px -14px rgba(22, 50, 74, 0.45);
     transform: rotate(var(--tilt));
     position: relative;
-    transition: transform 0.2s ease;
   }
-  .photo:hover { transform: rotate(0deg) scale(1.02); }
   img, .placeholder {
     width: 100%;
     aspect-ratio: var(--ratio);
@@ -48,18 +46,18 @@ const { src = '', alt = '', caption, tilt = 0, tape = true, ratio = '4 / 3' } = 
     display: grid;
     place-items: center;
     background:
-      repeating-linear-gradient(45deg, var(--paper-2) 0 12px, var(--paper) 12px 24px);
-    color: var(--ink-soft);
+      repeating-linear-gradient(45deg, var(--concrete) 0 12px, var(--paper) 12px 24px);
+    color: var(--steel);
     font-family: var(--font-hand);
-    font-size: 1.4rem;
+    font-size: 1.05rem;
   }
   figcaption {
     font-family: var(--font-hand);
-    font-size: 1.35rem;
+    font-size: 1.05rem;
     color: var(--ink);
     text-align: center;
     margin-top: 8px;
-    line-height: 1.1;
+    line-height: 1.25;
   }
   .tape {
     position: absolute;
@@ -68,7 +66,7 @@ const { src = '', alt = '', caption, tilt = 0, tape = true, ratio = '4 / 3' } = 
     width: 96px;
     height: 26px;
     transform: translateX(-50%) rotate(-3deg);
-    background: var(--tape);
+    background: rgba(221, 214, 190, 0.85);
     z-index: 1;
   }
 </style>

@@ -26,7 +26,9 @@ the layout code to update the site.
 - Any link in `site.json` that is empty or still contains `REPLACE_ME` (interest form,
   socials) is hidden instead of showing up broken. Until the interest form is set, the
   Join page buttons email the chapter instead.
-- Homepage stats with a value of `"0"` are hidden.
+- Homepage stats with a value of `"0"` are hidden. Each stat has a `phrase` such as
+  `"built {value} bridges"`, and the home page joins them into one sentence
+  ("So far we have built 3 bridges, served about 2,000 people, and grown to 40 members.").
 - `heroImage` empty: the homepage hero shows a dark navy background instead of a photo.
 - `joinCutout` empty: nothing shows beside the Join page headline.
 
@@ -83,7 +85,19 @@ shows a button linking to `sponsorPackageUrl`.
 
 ## Changing the look
 
-Colors and fonts are defined once at the top of `src/styles/global.css`. Change them there.
+Colors and the type scale are defined once at the top of `src/styles/global.css`. The
+fonts (Bodoni Moda, IBM Plex Sans, Architects Daughter) are bundled through the
+`@fontsource` packages and imported in `src/layouts/Base.astro`.
+
+Style rules, so the site stays consistent as people edit it:
+
+- Headings and buttons use sentence case ("Join the team", not "JOIN THE TEAM").
+- Each section has at most one filled button; other actions are plain underlined links.
+- Don't add numbers (01, 02) unless the items really are steps in order.
+- Yellow is the only accent color. Use it for highlights, not for large areas.
+- Handwritten text (`class="note"`) is for short notes that add information, like a
+  caption or a time commitment.
+- Write body text in full sentences.
 
 ## Running it on your computer (optional)
 
@@ -104,7 +118,7 @@ src/
   content/       past bridges (Markdown)
   pages/         one file per page (index, join, people, sponsor, bridges)
                  pages/projects/ only forwards old /projects links to /bridges
-  components/    Nav, Footer, Photo, PersonCard, Cutout
+  components/    Nav, Footer, Photo, PersonCard, Cutout, BridgeDrawing (hero sketch)
   layouts/       shared page shell
   styles/        global.css (colors, fonts, buttons)
 public/          images and files served as-is
