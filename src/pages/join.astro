@@ -11,20 +11,22 @@ import { isSet } from '../lib/url';
 const formReady = isSet(site.interestFormUrl);
 const joinHref = formReady
   ? site.interestFormUrl
-  : `mailto:${site.email}?subject=Joining%20EIA%20UW`;
+  : `mailto:${site.email}?subject=Joining%20Washington%20EIA`;
 const joinLabel = formReady ? 'Fill out the interest form' : 'Email us to join';
 const socials = site.socials.filter((s) => isSet(s.url));
 const tilts = [-2, 2, -1.5, 2.5];
+// Committees show as staggered photo rows once they have photos, and as plain columns until then.
+const committeePhotos = committees.some((c) => c.photo);
 ---
 
-<Base title="Join the team" description="Join Engineers in Action at UW: what a week looks like, our committees, and how to get involved.">
+<Base title="Join the team" description="Join the Washington Chapter of Engineers in Action: what a year looks like, our committees, and how to get involved.">
   <section>
     <div class="wrap split">
       <div>
         <h1>You don't need to be an engineer to build a bridge.</h1>
         <p class="lede">
-          Students from any major and any year can join, and we teach the technical parts as
-          we go. {formReady
+          Students from any major and any year can join, and we teach suspended bridge design
+          and AutoCAD to new members every autumn. {formReady
             ? "Fill out the interest form and we'll invite you to the next meeting."
             : "Send us an email and we'll invite you to the next meeting."}
         </p>
@@ -34,15 +36,16 @@ const tilts = [-2, 2, -1.5, 2.5];
         </div>
       </div>
       <div class="hero-cutout">
-        <Cutout src={site.joinCutout} alt="EIA UW members" tilt={-3} width="360px" />
+        <Cutout src={site.joinCutout} alt="Two chapter members in hard hats making heart shapes with their hands" tilt={-3} width="360px" />
       </div>
     </div>
   </section>
 
   <section class="band">
     <div class="wrap">
-      <h2>What a week looks like</h2>
-      <div class="columns">
+      <h2>What a year looks like</h2>
+      <p class="lede">We build one bridge per school year, and the work follows the seasons. {site.meetingInfo}</p>
+      <div class="columns four">
         {
           dayToDay.map((d) => (
             <div>
@@ -59,20 +62,32 @@ const tilts = [-2, 2, -1.5, 2.5];
     <div class="wrap">
       <h2>Committees</h2>
       <p class="lede">Most members join one committee, and you can switch at any time.</p>
-      <div class="stagger">
-        {
-          committees.map((c, i) => (
-            <div class="stagger-row">
-              <Photo src={c.photo} caption={`The ${c.name.toLowerCase()} committee`} tilt={tilts[i % tilts.length]} ratio="3 / 2" />
+      {
+        committeePhotos ? (
+          <div class="stagger">
+            {committees.map((c, i) => (
+              <div class="stagger-row">
+                <Photo src={c.photo} caption={`The ${c.name.toLowerCase()} committee`} tilt={tilts[i % tilts.length]} ratio="3 / 2" />
+                <div>
+                  <h3>{c.name}</h3>
+                  <p>{c.blurb}</p>
+                  {c.commitment && <p class="note">{c.commitment}</p>}
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div class="columns four">
+            {committees.map((c) => (
               <div>
                 <h3>{c.name}</h3>
                 <p>{c.blurb}</p>
-                {c.commitment && <p class="note">{c.commitment}</p>}
+                {c.commitment && <p class="note commit">{c.commitment}</p>}
               </div>
-            </div>
-          ))
-        }
-      </div>
+            ))}
+          </div>
+        )
+      }
     </div>
   </section>
 
@@ -101,6 +116,8 @@ const tilts = [-2, 2, -1.5, 2.5];
 
 <style>
   h1 { max-width: 13ch; font-size: var(--step-4); }
+  @media (min-width: 1000px) { .four { grid-template-columns: repeat(4, 1fr); } }
+  .commit { margin-top: 12px; }
   .hero-cutout { display: flex; justify-content: center; }
   .contact { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 18px 28px; margin-top: 16px; }
 </style>

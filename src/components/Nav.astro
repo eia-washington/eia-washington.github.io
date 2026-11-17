@@ -15,8 +15,9 @@ const { reveal = false } = Astro.props as { reveal?: boolean };
 <header class:list={['nav', { reveal }]}>
   <div class="wrap nav-inner">
     <a class="brand" href={url('/')}>
+      {site.logo && <img class="brand-logo" src={url(site.logo)} alt="" width="34" height="28" />}
       <span class="brand-mark">EIA</span>
-      <span class="brand-text">University of Washington</span>
+      <span class="brand-text">Washington Chapter</span>
     </a>
     <input type="checkbox" id="nav-toggle" class="sr-only" />
     <label for="nav-toggle" class="nav-burger" aria-label="Toggle menu">
@@ -88,6 +89,7 @@ const { reveal = false } = Astro.props as { reveal?: boolean };
     color: var(--ink);
   }
   .brand:hover { background: none; }
+  .brand-logo { width: 34px; height: auto; align-self: center; }
   .brand-mark {
     font-family: var(--font-display);
     font-weight: 500;

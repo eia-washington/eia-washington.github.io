@@ -1,32 +1,31 @@
 ---
-title: "Example Footbridge"
-community: "Community Name"
-country: "Country"
-date: 2026-08-01
-peopleServed: 1200
-spanMeters: 40
-summary: "Placeholder project. Replace this file with the real bridge: where it is, who it connects, and why it mattered."
-cover: ""
+# TEMPLATE: copy this file to add a bridge (for example 2027-community-name.md).
+# Files with "example" in the name are never published.
+title: "Example Suspended Bridge"
+community: "Community name"
+country: "Bolivia"
+date: 2027-08-01            # only the year is shown, as "Summer 2027"
+peopleServed: 100
+spanMeters: 60
+spanIsProjected: false      # true shows the span as a projection
+daysUncrossable: 150
+connects: "primary and secondary school, farmland, and the nearest clinic"
+partners:
+  - "University of Washington"
+summary: "One sentence about where the bridge is and who it connects."
+cover: "/images/bridges/example-1.jpg"
+cutout: ""                  # optional transparent PNG, shown as a sticker
+cutoutAlt: ""
 photos:
-  - src: ""
-    caption: "the finished span"
-  - src: ""
-    caption: "pouring the abutments"
-  - src: ""
-    caption: "the build team with community members"
+  - src: "/images/bridges/example-1.jpg"
+    caption: "The finished bridge"
 travelers:
-  - "Traveler One"
-  - "Traveler Two"
-  - "Traveler Three"
+  - "First Last"
 quotes:
-  - text: "Placeholder quote from a traveler about what the trip meant to them."
-    name: "Traveler One"
-    role: "Civil Engineering '27"
-  - text: "Placeholder quote about working alongside the community."
-    name: "Traveler Two"
-    role: "Mechanical Engineering '28"
+  - text: "A short quote from a traveler."
+    name: "First Last"
+    role: "Traveler, Community 2027"
 ---
 
-Write the longer story of the build here, in plain Markdown. A few paragraphs is plenty:
-how the community found us, what the site was like, what went wrong, and what it was
-like to walk across on the last day.
+Write two or three paragraphs about the build in full sentences: what the river cut the
+community off from, who we designed the bridge with, and who traveled to build it.

@@ -69,10 +69,13 @@ automatically shows as a sticker instead of a framed square. Set `joinCutout` in
 
 ### Adding a bridge
 
-1. Put photos in `public/images/projects/<year-name>/`.
+1. Put photos in `public/images/bridges/` (about 1400px wide, `.jpg`).
 2. Copy `src/content/projects/2026-example-bridge.md` to a new file, e.g.
-   `2027-rio-something.md`. The file name becomes the page URL.
-3. Fill in the fields at the top (between the `---` lines) and write the story below.
+   `2027-community-name.md`. The file name becomes the page URL. Files with "example" in
+   the name are templates and never appear on the site.
+3. Fill in the fields at the top (between the `---` lines) and write the story below in
+   full sentences. `connects` finishes the sentence "The bridge connects about N people
+   to …", and `partners` lists the universities that designed it with us.
 
 The bridge with the newest `date` is automatically featured on the home page as
 "our most recent project".
@@ -134,12 +137,14 @@ added, update `site` and `base` in `astro.config.mjs`. All internal links go thr
 
 ## Before launch checklist
 
-- [ ] Replace the example bridge in `src/content/projects/` (title, community, quotes, travelers, photos).
-- [ ] Replace the placeholder people in `src/data/people.json`.
+- [x] Real bridges from the 2026–27 sponsorship packet (Pocoata, Tomata, Pilipilicito).
+- [ ] Confirm the full 2026 travel team (the packet only names Christina Ho and Jack Provost) and the build month.
+- [ ] Add the rest of the officers to `src/data/people.json`, with majors, grad years, headshots, and LinkedIn links.
+- [ ] Confirm the committees in `src/data/committees.json` match how the chapter is actually organized.
 - [ ] Set `interestFormUrl` and the three social links in `src/data/site.json`.
-- [ ] Set real homepage `stats`, or leave them at `"0"` to keep them hidden.
-- [ ] Add `heroImage`, `gallery` photos, and committee photos.
-- [ ] Fill in `share` for each item in `sponsorUses` (e.g. "about 60% of a bridge budget") once the numbers are known.
-- [ ] Confirm the sponsor benefits in `sponsorBenefits` match the sponsorship package (logo on shirts? tax receipts through EIA national?).
-- [ ] Confirm the mission paragraph (`purpose`) matches how EIA national describes partner communities.
-- [ ] Confirm `eiauw@uw.edu` is the public contact (the GitHub org uses uweiabridge@gmail.com).
+- [x] Homepage stats (3 bridges, about 475 people, about 25 members).
+- [x] Hero, gallery, and bridge photos from the sponsorship packet.
+- [ ] Committee photos and headshots.
+- [ ] Update `sponsorUses`, `sponsorTiers`, and `bridgeCost` in `site.json` each year from the new sponsorship packet.
+- [x] Public contact is uweiabridge@gmail.com (from the sponsorship packet).
+- [ ] Update `meetingInfo` in `site.json` if the meeting time or room changes.

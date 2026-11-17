@@ -1,58 +1,103 @@
 ---
 import Base from '../layouts/Base.astro';
+import Photo from '../components/Photo.astro';
 import site from '../data/site.json';
+
+const cost = site.bridgeCost;
 ---
 
-<Base title="Sponsor us" description="Sponsor Engineers in Action at UW and help fund footbridges for rural communities.">
+<Base title="Sponsor us" description="Sponsor the Washington Chapter of Engineers in Action and help fund suspended footbridges for rural communities in Bolivia.">
   <section>
-    <div class="wrap">
-      <h1>Help us build the next bridge.</h1>
-      <p class="lede">
-        Sponsorships pay for the materials, travel, and tools that a footbridge needs. In
-        return, your company gets in front of UW engineering students who have designed and
-        built real infrastructure.
-      </p>
-      <div class="actions">
-        <a class="btn" href={site.sponsorPackageUrl} target="_blank" rel="noopener">View the sponsorship package</a>
-        <a class="text-link" href={`mailto:${site.email}?subject=Sponsoring%20EIA%20UW`}>Email us about sponsoring</a>
+    <div class="wrap split">
+      <div>
+        <h1>Help us build the next bridge.</h1>
+        <p class="lede">
+          A suspended footbridge costs about {cost.total} to build. Engineers in Action, the local
+          municipality, and the community cover most of that, and our chapter raises about
+          {cost.chapterShare} each year for its share and for travel.
+        </p>
+        <div class="actions">
+          <a class="btn" href={site.sponsorPackageUrl} target="_blank" rel="noopener">View the sponsorship package</a>
+          <a class="text-link" href={`mailto:${site.email}?subject=Sponsoring%20Washington%20EIA`}>Email us about sponsoring</a>
+        </div>
       </div>
+      <Photo src="/images/bridges/pocoata-3.jpg" caption="Installing the deck in Pocoata, 2024" tilt={2} ratio="3 / 2" />
     </div>
   </section>
 
   <section id="where" class="band">
     <div class="wrap">
-      <h2>Where the money goes</h2>
+      <h2>Where our {cost.chapterShare} goes</h2>
       <div class="columns">
         {
           site.sponsorUses.map((u) => (
             <div>
+              <p class="amount">{u.share}</p>
               <h3>{u.title}</h3>
               <p>{u.text}</p>
-              {u.share && <p class="note share">{u.share}</p>}
             </div>
           ))
         }
       </div>
+      <p class="fine">{site.sponsorUsesNote}</p>
     </div>
   </section>
 
   <section>
-    <div class="wrap split">
-      <h2>What sponsors get</h2>
-      <ul class="benefits">
-        {site.sponsorBenefits.map((b) => <li>{b}</li>)}
-      </ul>
+    <div class="wrap split funders">
+      <div>
+        <h2>Who pays for a bridge</h2>
+        <p>
+          Our chapter's share sits on top of a much larger budget. For the 2026 Pilipilicito
+          bridge, the total of about {cost.total} was split like this.
+        </p>
+        <p class="fine">{cost.note}</p>
+      </div>
+      <dl class="funder-list">
+        {
+          cost.funders.map((f) => (
+            <div>
+              <dt>{f.name}</dt>
+              <dd>{f.amount}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <h2>Sponsorship levels</h2>
+      <p class="lede">Each level includes everything in the levels below it.</p>
+      <div class="tiers">
+        {
+          site.sponsorTiers.map((t) => (
+            <article class="tier">
+              <h3>{t.name}</h3>
+              <p class="range">{t.range}</p>
+              <ul>
+                {t.benefits.map((b) => <li>{b}</li>)}
+              </ul>
+            </article>
+          ))
+        }
+      </div>
+      <div class="actions">
+        <a class="btn" href={`mailto:${site.email}?subject=Sponsoring%20Washington%20EIA`}>Email us about sponsoring</a>
+        <a class="text-link" href={site.sponsorPackageUrl} target="_blank" rel="noopener">View the full package</a>
+      </div>
     </div>
   </section>
 
   {
     site.sponsorPackageEmbedUrl && (
-      <section class="band">
+      <section>
         <div class="wrap">
           <div class="embed">
             <iframe
               src={site.sponsorPackageEmbedUrl}
-              title="EIA UW sponsorship package"
+              title="Washington EIA sponsorship package"
               loading="lazy"
               allowfullscreen
             />
@@ -65,14 +110,38 @@ import site from '../data/site.json';
 
 <style>
   h1 { max-width: 12ch; }
-  .share { margin-top: 12px; }
-  .benefits { list-style: none; padding: 0; margin: 0; display: grid; gap: 20px; }
-  .benefits li {
-    padding-left: 22px;
-    border-left: 3px solid var(--yellow);
-    font-size: var(--step-1);
-    line-height: 1.45;
+  .amount {
+    font-family: var(--font-display);
+    font-size: var(--step-3);
+    color: var(--ink);
+    margin: 0 0 4px;
+    letter-spacing: -0.02em;
   }
+  .fine { color: var(--steel); font-size: 0.95rem; margin-top: 32px; }
+  .funders { align-items: start; }
+  .funder-list { margin: 0; display: grid; gap: 0; }
+  .funder-list div {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .funder-list dt { font-size: var(--step-1); }
+  .funder-list dd { margin: 0; font-family: var(--font-display); font-size: var(--step-2); white-space: nowrap; }
+  .tiers {
+    display: grid;
+    gap: 40px clamp(24px, 4vw, 48px);
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    margin-top: 32px;
+  }
+  @media (min-width: 1000px) { .tiers { grid-template-columns: repeat(4, 1fr); } }
+  .tier h3 { margin-bottom: 2px; }
+  .tier .range { margin: 0 0 14px; font-weight: 500; }
+  .tier ul { margin: 0; padding-left: 1.1em; color: var(--steel); }
+  .tier li { margin: 6px 0; }
+  .tier li::marker { color: var(--ink); }
   .embed {
     position: relative;
     width: 100%;
@@ -82,11 +151,5 @@ import site from '../data/site.json';
     background: var(--white);
     box-shadow: 0 16px 40px -18px rgba(22, 50, 74, 0.4);
   }
-  .embed iframe {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-  }
+  .embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 </style>

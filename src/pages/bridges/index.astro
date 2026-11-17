@@ -9,11 +9,11 @@ const projects = (await getCollection('projects')).sort(
 );
 ---
 
-<Base title="Past bridges" description="Every footbridge Engineers in Action at UW has built.">
+<Base title="Past bridges" description="Every suspended footbridge the Washington Chapter of Engineers in Action has built in Bolivia.">
   <section>
     <div class="wrap">
       <h1>Past bridges</h1>
-      <p class="lede">Each of these footbridges was designed by UW students and built with the community that uses it.</p>
+      <p class="lede">Our chapter has designed a suspended footbridge in Bolivia every year since 2024, and each one was built with the community that uses it.</p>
       <div class="list">
         {
           projects.map((p, i) => (
@@ -21,7 +21,7 @@ const projects = (await getCollection('projects')).sort(
               <Photo src={p.data.cover || p.data.photos[0]?.src} tilt={i % 2 ? 1.5 : -1.5} />
               <div>
                 <h2>{p.data.title}</h2>
-                <p class="note">{p.data.community}, {p.data.country}, {p.data.date.getUTCFullYear()}</p>
+                <p class="note">{p.data.community}, {p.data.country}, Summer {p.data.date.getUTCFullYear()}</p>
                 <p>{p.data.summary}</p>
               </div>
             </a>

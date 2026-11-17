@@ -3,7 +3,8 @@ import Base from '../../layouts/Base.astro';
 import Photo from '../../components/Photo.astro';
 import { getCollection, render } from 'astro:content';
 import { url } from '../../lib/url';
-import { listJoin, projectSentence } from '../../lib/text';
+import { listJoin, projectSentence, season } from '../../lib/text';
+import Cutout from '../../components/Cutout.astro';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
@@ -14,6 +15,8 @@ const { project } = Astro.props;
 const { Content } = await render(project);
 const d = project.data;
 const tilts = [-2, 1.5, -1, 2.5];
+const withThe = (n: string) => (n.startsWith('University') ? `the ${n}` : n);
+const others = d.partners.filter((n) => !n.includes('Washington')).map(withThe);
 ---
 
 <Base title={d.title} description={d.summary}>
@@ -21,8 +24,11 @@ const tilts = [-2, 1.5, -1, 2.5];
     <div class="wrap">
       <a class="back text-link" href={url('/bridges')}>All past bridges</a>
       <h1>{d.title}</h1>
-      <p class="note">{d.community}, {d.country}, {d.date.toLocaleDateString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' })}</p>
-      <p class="lede">{projectSentence({ ...d, travelers: [] })}</p>
+      <p class="note">{d.community}, {d.country}, {season(d)}</p>
+      <p class="lede">{projectSentence(d, false)}</p>
+      {others.length > 0 && (
+        <p class="partners">Our chapter designed this bridge with teams from {listJoin(others)}.</p>
+      )}
     </div>
   </section>
 
@@ -38,7 +44,6 @@ const tilts = [-2, 1.5, -1, 2.5];
 
   <section>
     <div class="wrap prose">
-      <p class="summary">{d.summary}</p>
       <Content />
     </div>
   </section>
@@ -62,8 +67,13 @@ const tilts = [-2, 1.5, -1, 2.5];
     d.travelers.length > 0 && (
       <section>
         <div class="wrap">
-          <h2>The travel team</h2>
-          <p class="lede">{listJoin(d.travelers)} traveled to build this bridge.</p>
+          <div class="split">
+            <div>
+              <h2>The travel team</h2>
+              <p class="lede">{listJoin(d.travelers)} traveled from UW to build this bridge with the community and local masons.</p>
+            </div>
+            <Cutout src={d.cutout} alt={d.cutoutAlt} tilt={-2} width="100%" />
+          </div>
         </div>
       </section>
     )
@@ -74,6 +84,7 @@ const tilts = [-2, 1.5, -1, 2.5];
   .back { display: inline-block; margin-bottom: 28px; }
   h1 { max-width: 14ch; }
   .note { margin-bottom: 20px; }
+  .partners { color: var(--steel); }
   .photos {
     display: grid;
     gap: 28px;

@@ -1,14 +1,18 @@
 [
   {
-    "title": "General meetings",
-    "text": "The whole team meets every week for updates and guest speakers, and there is usually pizza."
+    "title": "Autumn",
+    "text": "New members learn suspended bridge design, and the chapter receives its site assignment and writes the Concept Definition Report for the first review call."
   },
   {
-    "title": "Committee sessions",
-    "text": "Each committee also meets on its own, and that's where most of the design calculations, grant writing, and trip planning get done."
+    "title": "Winter",
+    "text": "We design the bridge, teach AutoCAD to new members, and prepare the Design Report for the second review call."
   },
   {
-    "title": "The build trip",
-    "text": "Once a year, a group of us travels to the partner community and builds the bridge alongside local masons and families."
+    "title": "Spring",
+    "text": "We write a detailed construction and logistics plan, prepare the Construction and Safety Report for the third review call, and choose the travel team."
+  },
+  {
+    "title": "Summer",
+    "text": "Two to four members travel to Bolivia to build the bridge with the community, and they write the Post-Travel Report for the final review call."
   }
 ]

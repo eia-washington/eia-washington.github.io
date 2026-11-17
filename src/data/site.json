@@ -1,17 +1,17 @@
 {
   "name": "Engineers in Action",
-  "chapter": "University of Washington Chapter",
-  "shortName": "EIA UW",
-  "tagline": "We're UW students who design footbridges for communities that rivers cut off, and then we travel to build them with the people who will use them.",
-  "footerLine": "Footbridges designed by UW students and built with the communities that use them.",
-  "purpose": "Engineers in Action at UW is a student team that designs pedestrian footbridges for rural communities that rivers cut off from schools, clinics, and markets. We spend the school year on design, fundraising, and planning, and then a group of us travels to build the bridge with the community.",
-  "email": "eiauw@uw.edu",
+  "chapter": "Washington Chapter",
+  "shortName": "Washington EIA",
+  "tagline": "We're a team of about 25 UW students who design a suspended footbridge for a rural community in Bolivia every year, and then send members to build it with the community.",
+  "footerLine": "One year, one bridge, every year.",
+  "purpose": "Rivers in rural Bolivia can be impossible to cross for almost half the year, which cuts families off from school, farmland, markets, and healthcare during the rainy season. The Washington Chapter of Engineers in Action designs a suspended footbridge for one of these communities each year, working with Engineers in Action's professional engineers and teams from other universities. Each summer, a few of our members travel to Bolivia and build the bridge alongside community members and local masons.",
+  "email": "uweiabridge@gmail.com",
   "interestFormUrl": "https://forms.gle/REPLACE_ME",
   "sponsorPackageUrl": "https://canva.link/sponsor-eia-uw",
   "sponsorPackageEmbedUrl": "",
-  "heroImage": "",
-  "heroImageAlt": "The EIA UW team on a finished footbridge",
-  "joinCutout": "",
+  "heroImage": "/images/hero.jpg",
+  "heroImageAlt": "Members of the build team and the community, dressed for the inauguration, on a finished footbridge in Bolivia",
+  "joinCutout": "/images/cutouts/heart-hands.png",
   "socials": [
     {
       "label": "Instagram",
@@ -28,60 +28,122 @@
   ],
   "stats": [
     {
-      "value": "0",
+      "value": "3",
       "phrase": "built {value} bridges"
     },
     {
-      "value": "0",
-      "phrase": "served about {value} people"
+      "value": "475",
+      "phrase": "given about {value} people a safe crossing"
     },
     {
-      "value": "0",
-      "phrase": "grown to {value} members"
+      "value": "25",
+      "phrase": "grown to about {value} members"
     }
   ],
   "gallery": [
     {
-      "src": "",
-      "caption": "Site survey"
+      "src": "/images/gallery/hard-hats.jpg",
+      "caption": "Hard hats on"
     },
     {
-      "src": "",
-      "caption": "General meeting"
-    },
-    {
-      "src": "",
+      "src": "/images/gallery/concrete.jpg",
       "caption": "Mixing concrete"
     },
     {
-      "src": "",
-      "caption": "First walk across"
+      "src": "/images/gallery/soccer.jpg",
+      "caption": "Soccer after work"
     },
     {
-      "src": "",
-      "caption": "The travel team"
+      "src": "/images/gallery/walkway.jpg",
+      "caption": "Out on the walkway"
+    },
+    {
+      "src": "/images/gallery/deck.jpg",
+      "caption": "Crossing the finished deck"
     }
   ],
   "sponsorUses": [
     {
-      "title": "Materials",
-      "text": "Cable, steel, cement, and lumber make up most of what a footbridge costs.",
-      "share": ""
+      "title": "Materials and services",
+      "text": "Engineers in Action requires a contribution of $3,125 for each traveler toward the bridge's materials and skilled masons. With two travelers, that comes to $6,250.",
+      "share": "$6,250"
     },
     {
-      "title": "Travel",
-      "text": "Flights, lodging, and local transport get the student build team to the community and back.",
-      "share": ""
+      "title": "Airfare",
+      "text": "Flights to Bolivia for two travelers cost about $3,600.",
+      "share": "$3,600"
     },
     {
-      "title": "Tools and safety gear",
-      "text": "We buy hand tools, harnesses, and site safety equipment for each build and reuse them on later trips.",
-      "share": ""
+      "title": "Food and in-country travel",
+      "text": "At about $9.89 per person per day, six weeks on site comes to roughly $1,000.",
+      "share": "$1,000"
     }
   ],
-  "sponsorBenefits": [
-    "We put your logo on this site and in our sponsorship materials.",
-    "You can recruit from a team of UW engineering students who have designed and built real infrastructure.",
-    "We send you photos and updates from the build trip that you can share with your own team."
+  "meetingInfo": "General meetings are on Wednesdays at 5:30 PM in CMU 230.",
+  "logo": "/images/logo.png",
+  "bridgeCost": {
+    "total": "$80,000",
+    "chapterShare": "$10,850",
+    "funders": [
+      {
+        "name": "Engineers in Action Foundation",
+        "amount": "$48,508"
+      },
+      {
+        "name": "The municipality (G.A.M. de Padilla)",
+        "amount": "$24,029"
+      },
+      {
+        "name": "The community",
+        "amount": "$7,726"
+      }
+    ],
+    "note": "Figures are from the 2026 Pilipilicito bridge, converted at 6.86 bolivianos to the dollar."
+  },
+  "sponsorUsesNote": "Anything we raise beyond this goal rolls over to next year's bridge.",
+  "sponsorTiers": [
+    {
+      "name": "Foundation",
+      "range": "$500 to $1,000",
+      "benefits": [
+        "A small logo on our sponsor page for one year",
+        "Two thank-you posts on LinkedIn and Instagram",
+        "Access to an opt-in folder of member resumes"
+      ]
+    },
+    {
+      "name": "Tower",
+      "range": "$1,001 to $3,000",
+      "benefits": [
+        "A medium logo on the bridge construction banner and our chapter work shirts",
+        "A sponsor spotlight on social media",
+        "A priority speaking slot at a club meeting",
+        "A formatted resume book (PDF)",
+        "A mention in bridge press releases"
+      ]
+    },
+    {
+      "name": "Main Cable",
+      "range": "$3,001 to $7,500",
+      "benefits": [
+        "The largest logo on the banner and shirts",
+        "Your logo on our LinkedIn banner",
+        "Optional recognition on the bridge plaque, if approved locally",
+        "A recruiting or information session on campus",
+        "The resume book two weeks early",
+        "Optional mentorship connections",
+        "A partner feature video and social media highlights"
+      ]
+    },
+    {
+      "name": "Legacy Builder",
+      "range": "$7,501 to $15,000",
+      "benefits": [
+        "Recognition as Lead Project Sponsor for the bridge",
+        "The largest logo placement across all materials",
+        "Recognition in all media, presentations, and impact reports",
+        "Custom engagement, such as a site visit, keynote, or branded content"
+      ]
+    }
   ]
 }
