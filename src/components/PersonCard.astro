@@ -21,11 +21,13 @@ const initials = person.name
   .join('')
   .slice(0, 2)
   .toUpperCase();
+// Transparent PNG headshots (background removed) render as stickers instead of framed squares.
+const isCutout = /\.png$/i.test(person.photo || '');
 const yr = person.gradYear ? `'${String(person.gradYear).slice(-2)}` : '';
 ---
 
 <article class="person">
-  <div class="cutout" style={`--tilt:${tilt}deg`}>
+  <div class:list={['cutout', { sticker: isCutout, 'is-sticker': isCutout }]} style={`--tilt:${tilt}deg`}>
     {
       person.photo ? (
         <img src={url(person.photo)} alt={person.name} loading="lazy" />
@@ -63,10 +65,13 @@ const yr = person.gradYear ? `'${String(person.gradYear).slice(-2)}` : '';
     transition: transform 0.2s ease;
   }
   .person:hover .cutout { transform: rotate(0deg); }
+  .cutout.is-sticker { background: none; padding: 0; box-shadow: none; }
+  .cutout.is-sticker img { object-fit: contain; object-position: bottom; filter: none; }
   .cutout img, .initials {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: 50% 25%;
     filter: grayscale(0.15);
   }
   .initials {

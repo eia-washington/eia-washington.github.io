@@ -1,0 +1,36 @@
+---
+// A cut-out photo (transparent PNG, background removed) shown as a tilted sticker.
+// Renders nothing until `src` is set, so it can sit in a layout before the image exists.
+import { url } from '../lib/url';
+
+interface Props {
+  src?: string;
+  alt?: string;
+  tilt?: number;
+  width?: string; // CSS width, e.g. "280px" or "40%"
+  class?: string;
+}
+const { src = '', alt = '', tilt = -3, width = '320px', class: cls } = Astro.props;
+---
+
+{
+  src && (
+    <img
+      class:list={['cutout-img', 'sticker', cls]}
+      src={url(src)}
+      alt={alt}
+      loading="lazy"
+      style={`--tilt:${tilt}deg; width:${width}`}
+    />
+  )
+}
+
+<style>
+  .cutout-img {
+    max-width: 100%;
+    height: auto;
+    transform: rotate(var(--tilt));
+    transition: transform 0.2s ease;
+  }
+  .cutout-img:hover { transform: rotate(0deg) scale(1.02); }
+</style>

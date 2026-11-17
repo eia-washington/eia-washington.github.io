@@ -1,5 +1,5 @@
 ---
-import { url } from '../lib/url';
+import { url, isSet } from '../lib/url';
 import site from '../data/site.json';
 const year = new Date().getFullYear();
 ---
@@ -7,16 +7,16 @@ const year = new Date().getFullYear();
 <footer class="footer band-dark">
   <div class="wrap footer-grid">
     <div>
-      <p class="footer-tag">{site.tagline}</p>
+      <p class="footer-tag">{site.footerLine}</p>
       <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
       <ul class="socials">
-        {site.socials.map((s) => <li><a href={s.url} rel="noopener" target="_blank">{s.label}</a></li>)}
+        {site.socials.filter((s) => isSet(s.url)).map((s) => <li><a href={s.url} rel="noopener" target="_blank">{s.label}</a></li>)}
       </ul>
     </div>
     <div>
       <h4>explore</h4>
       <ul>
-        <li><a href={url('/projects')}>past bridges</a></li>
+        <li><a href={url('/bridges')}>past bridges</a></li>
         <li><a href={url('/people')}>people</a></li>
         <li><a href={url('/join')}>join the team</a></li>
         <li><a href={url('/sponsor')}>sponsor us</a></li>
@@ -25,7 +25,7 @@ const year = new Date().getFullYear();
     <div>
       <h4>get involved</h4>
       <ul>
-        <li><a href={site.interestFormUrl} rel="noopener" target="_blank">interest form</a></li>
+        {isSet(site.interestFormUrl) && <li><a href={site.interestFormUrl} rel="noopener" target="_blank">interest form</a></li>}
         <li><a href={site.sponsorPackageUrl} rel="noopener" target="_blank">sponsorship package</a></li>
       </ul>
     </div>
@@ -50,7 +50,8 @@ const year = new Date().getFullYear();
     font-family: var(--font-display);
     font-size: 1.6rem;
     line-height: 1.2;
-    max-width: 22ch;
+    max-width: 26ch;
+    font-weight: 300;
   }
   h4 {
     font-family: var(--font-hand);

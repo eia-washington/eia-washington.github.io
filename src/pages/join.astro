@@ -1,22 +1,41 @@
 ---
 import Base from '../layouts/Base.astro';
+import Photo from '../components/Photo.astro';
+import Cutout from '../components/Cutout.astro';
 import site from '../data/site.json';
 import committees from '../data/committees.json';
 import dayToDay from '../data/dayToDay.json';
+import { isSet } from '../lib/url';
+
+// Until the interest form link is set in site.json, the button emails the chapter instead.
+const formReady = isSet(site.interestFormUrl);
+const joinHref = formReady
+  ? site.interestFormUrl
+  : `mailto:${site.email}?subject=Joining%20EIA%20UW`;
+const socials = site.socials.filter((s) => isSet(s.url));
+const tilts = [-2, 2, -1.5, 2.5];
 ---
 
 <Base title="Join the team" description="Join Engineers in Action at UW: what we do day to day, our committees, and how to get involved.">
   <section>
-    <div class="wrap">
-      <span class="eyebrow">join the team</span>
-      <h1>come as you are.<br />build something real.</h1>
-      <p class="lede">
-        Any major, any year. Fill out the interest form and we'll reach out about the next
-        meeting.
-      </p>
-      <div class="btn-row">
-        <a class="btn btn-primary" href={site.interestFormUrl} target="_blank" rel="noopener">fill out the interest form</a>
-        <a class="btn" href={`mailto:${site.email}`}>email us</a>
+    <div class="wrap split">
+      <div>
+        <span class="eyebrow">join the team</span>
+        <h1>any major, any year.<br />we'll teach you the rest.</h1>
+        <p class="lede">
+          You can join from any major and in any year. {formReady
+            ? "Fill out the interest form and we'll reach out about the next meeting."
+            : "Email us and we'll reach out about the next meeting."}
+        </p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href={joinHref} target={formReady ? '_blank' : undefined} rel="noopener">
+            {formReady ? 'fill out the interest form' : 'email us to join'}
+          </a>
+          {formReady && <a class="link-arrow" href={`mailto:${site.email}`}>email us</a>}
+        </div>
+      </div>
+      <div class="hero-cutout">
+        <Cutout src={site.joinCutout} alt="EIA UW members" tilt={-3} width="360px" />
       </div>
     </div>
   </section>
@@ -43,15 +62,18 @@ import dayToDay from '../data/dayToDay.json';
     <div class="wrap">
       <span class="eyebrow">our committees</span>
       <h2>find your corner</h2>
-      <p class="lede">Most members join one committee. You can switch any time.</p>
-      <div class="cards">
+      <p class="lede">Most members join one committee, and you can switch any time.</p>
+      <div class="stagger">
         {
           committees.map((c, i) => (
-            <div class="card">
-              <span class="num">{String(i + 1).padStart(2, '0')}</span>
-              <h3>{c.name}</h3>
-              <p>{c.blurb}</p>
-              {c.commitment && <p class="meta">{c.commitment}</p>}
+            <div class="stagger-row">
+              <Photo src={c.photo} caption={c.name.toLowerCase()} tilt={tilts[i % tilts.length]} ratio="3 / 2" />
+              <div>
+                <span class="num">{String(i + 1).padStart(2, '0')}</span>
+                <h3>{c.name}</h3>
+                <p>{c.blurb}</p>
+                {c.commitment && <p class="meta">{c.commitment}</p>}
+              </div>
             </div>
           ))
         }
@@ -59,28 +81,34 @@ import dayToDay from '../data/dayToDay.json';
     </div>
   </section>
 
-  <section class="band-dark">
+  <section class="band">
     <div class="wrap split">
       <div>
         <span class="eyebrow">questions?</span>
         <h2>talk to us.</h2>
         <p>
-          Email <a href={`mailto:${site.email}`}>{site.email}</a> or message us on
-          social media. We read everything.
+          Email <a href={`mailto:${site.email}`}>{site.email}</a>{socials.length > 0 && ' or message us on social media'}, and we'll get back to you.
         </p>
-        <ul class="contact">
-          {site.socials.map((s) => <li><a href={s.url} target="_blank" rel="noopener">{s.label} ↗</a></li>)}
-        </ul>
+        {
+          socials.length > 0 && (
+            <ul class="contact">
+              {socials.map((s) => <li><a class="link-arrow" href={s.url} target="_blank" rel="noopener">{s.label}</a></li>)}
+            </ul>
+          )
+        }
       </div>
       <div>
-        <a class="btn" href={site.interestFormUrl} target="_blank" rel="noopener">interest form →</a>
+        <a class="btn btn-primary" href={joinHref} target={formReady ? '_blank' : undefined} rel="noopener">
+          {formReady ? 'interest form →' : 'email us to join →'}
+        </a>
       </div>
     </div>
   </section>
 </Base>
 
 <style>
-  h1 { max-width: 16ch; }
+  h1 { max-width: 15ch; font-size: clamp(2.6rem, 6vw, 4.6rem); }
   .lede { margin-bottom: 28px; }
-  .contact { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 18px; }
+  .hero-cutout { display: flex; justify-content: center; }
+  .contact { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 18px 28px; margin-top: 16px; }
 </style>

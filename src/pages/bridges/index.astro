@@ -1,0 +1,54 @@
+---
+import Base from '../../layouts/Base.astro';
+import Photo from '../../components/Photo.astro';
+import { getCollection } from 'astro:content';
+import { url } from '../../lib/url';
+
+const projects = (await getCollection('projects')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+
+<Base title="Past bridges" description="Every footbridge Engineers in Action at UW has built.">
+  <section>
+    <div class="wrap">
+      <span class="eyebrow">past bridges</span>
+      <h1>where we've been.</h1>
+      <div class="list">
+        {
+          projects.map((p, i) => (
+            <a class="item" href={url(`/bridges/${p.id}`)}>
+              <Photo src={p.data.cover || p.data.photos[0]?.src} tilt={i % 2 ? 1.5 : -1.5} />
+              <div>
+                <span class="hand">{p.data.date.getUTCFullYear()}</span>
+                <h2>{p.data.title}</h2>
+                <p class="where">{p.data.community}, {p.data.country}</p>
+                <p>{p.data.summary}</p>
+                {p.data.peopleServed && (
+                  <p class="served">{p.data.peopleServed.toLocaleString()} people served</p>
+                )}
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .list { display: grid; gap: 64px; margin-top: 48px; }
+  .item {
+    display: grid;
+    gap: 28px;
+    grid-template-columns: 1fr;
+    align-items: center;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  @media (min-width: 760px) { .item { grid-template-columns: 360px 1fr; } }
+  .item h2 { font-size: clamp(1.8rem, 3.5vw, 2.5rem); }
+  .item:hover h2 { color: var(--accent); }
+  .where { color: var(--ink-soft); font-weight: 600; }
+  .served { color: var(--navy); font-weight: 600; }
+</style>

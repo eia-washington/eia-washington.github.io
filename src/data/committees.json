@@ -2,21 +2,25 @@
   {
     "name": "Design",
     "blurb": "Surveys the site, runs the structural calcs, and produces the drawings our partner engineers sign off on.",
-    "commitment": "~4 hrs/week"
+    "commitment": "~4 hrs/week",
+    "photo": ""
   },
   {
     "name": "Fundraising",
     "blurb": "Writes grants, runs events, and talks to sponsors so the bridge (and the trip) gets paid for.",
-    "commitment": "~3 hrs/week"
+    "commitment": "~3 hrs/week",
+    "photo": ""
   },
   {
     "name": "Outreach",
     "blurb": "Runs our socials, recruits new members, and visits local schools to talk about engineering.",
-    "commitment": "~2 hrs/week"
+    "commitment": "~2 hrs/week",
+    "photo": ""
   },
   {
     "name": "Logistics",
     "blurb": "Plans the build trip: travel, health and safety, budgets, and coordination with our partners abroad.",
-    "commitment": "~2 hrs/week"
+    "commitment": "~2 hrs/week",
+    "photo": ""
   }
 ]

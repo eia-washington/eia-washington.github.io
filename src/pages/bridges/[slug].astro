@@ -1,0 +1,102 @@
+---
+import Base from '../../layouts/Base.astro';
+import Photo from '../../components/Photo.astro';
+import { getCollection, render } from 'astro:content';
+import { url } from '../../lib/url';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((p) => ({ params: { slug: p.id }, props: { project: p } }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+const d = project.data;
+const tilts = [-2, 1.5, -1, 2.5];
+---
+
+<Base title={d.title} description={d.summary}>
+  <section>
+    <div class="wrap">
+      <a class="back" href={url('/bridges')}>← all bridges</a>
+      <span class="eyebrow">{d.date.toLocaleDateString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' })}</span>
+      <h1>{d.title}</h1>
+      <p class="lede">{d.community}, {d.country}</p>
+      <div class="stats">
+        {d.peopleServed && <div class="stat"><strong>{d.peopleServed.toLocaleString()}</strong><span>people served</span></div>}
+        {d.spanMeters && <div class="stat"><strong>{d.spanMeters}m</strong><span>span</span></div>}
+        {d.travelers.length > 0 && <div class="stat"><strong>{d.travelers.length}</strong><span>students traveled</span></div>}
+      </div>
+    </div>
+  </section>
+
+  {
+    d.photos.length > 0 && (
+      <section class="band">
+        <div class="wrap photos">
+          {d.photos.map((p, i) => <Photo src={p.src} caption={p.caption} tilt={tilts[i % tilts.length]} />)}
+        </div>
+      </section>
+    )
+  }
+
+  <section>
+    <div class="wrap prose">
+      <p class="summary">{d.summary}</p>
+      <Content />
+    </div>
+  </section>
+
+  {
+    d.quotes.length > 0 && (
+      <section class="band">
+        <div class="wrap quotes">
+          {d.quotes.map((q) => (
+            <blockquote>
+              <p>“{q.text}”</p>
+              <cite><span class="hand">{q.name}</span>{q.role && <small>{q.role}</small>}</cite>
+            </blockquote>
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  {
+    d.travelers.length > 0 && (
+      <section>
+        <div class="wrap">
+          <span class="eyebrow">the travel team</span>
+          <p class="lede">{d.travelers.join(', ')}</p>
+        </div>
+      </section>
+    )
+  }
+</Base>
+
+<style>
+  .back { display: inline-block; margin-bottom: 24px; text-decoration: none; font-weight: 600; }
+  .lede { margin-bottom: 28px; }
+  .photos {
+    display: grid;
+    gap: 28px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+  .summary { font-size: 1.3rem; font-family: var(--font-display); line-height: 1.4; }
+  .quotes {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+  blockquote {
+    margin: 0;
+    padding: 24px;
+    background: #fff;
+    border-left: 4px solid var(--accent);
+    border-radius: var(--radius);
+  }
+  blockquote p { font-family: var(--font-display); font-size: 1.25rem; line-height: 1.35; }
+  cite { font-style: normal; display: flex; flex-direction: column; }
+  cite .hand { font-size: 1.5rem; }
+  cite small { color: var(--ink-soft); }
+</style>

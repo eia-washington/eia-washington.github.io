@@ -9,13 +9,45 @@ import site from '../data/site.json';
       <span class="eyebrow">sponsor us</span>
       <h1>help us build<br />the next bridge.</h1>
       <p class="lede">
-        Sponsorships pay for materials, travel, and tools. In return your company gets in
-        front of UW engineering students and a story worth telling.
+        Sponsorships pay for the materials, travel, and tools that a footbridge needs. In
+        return, your company gets in front of UW engineering students who have designed and
+        built real infrastructure.
       </p>
       <div class="btn-row">
         <a class="btn btn-primary" href={site.sponsorPackageUrl} target="_blank" rel="noopener">view the sponsorship package</a>
-        <a class="btn" href={`mailto:${site.email}?subject=Sponsoring%20EIA%20UW`}>email us</a>
+        <a class="link-arrow" href={`mailto:${site.email}?subject=Sponsoring%20EIA%20UW`}>email us</a>
       </div>
+    </div>
+  </section>
+
+  <section id="where" class="band">
+    <div class="wrap">
+      <span class="eyebrow">where your support goes</span>
+      <h2>what a bridge costs</h2>
+      <div class="cards">
+        {
+          site.sponsorUses.map((u, i) => (
+            <div class="card">
+              <span class="num">{String(i + 1).padStart(2, '0')}</span>
+              <h3>{u.title}</h3>
+              <p>{u.text}</p>
+              {u.share && <p class="meta">{u.share}</p>}
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap split">
+      <div>
+        <span class="eyebrow">what sponsors get</span>
+        <h2>what you get back.</h2>
+      </div>
+      <ul class="benefits">
+        {site.sponsorBenefits.map((b) => <li>{b}</li>)}
+      </ul>
     </div>
   </section>
 
@@ -40,6 +72,19 @@ import site from '../data/site.json';
 <style>
   h1 { max-width: 14ch; }
   .lede { margin-bottom: 28px; }
+  .benefits { list-style: none; padding: 0; margin: 0; display: grid; gap: 18px; }
+  .benefits li {
+    padding-left: 28px;
+    position: relative;
+    font-size: 1.1rem;
+  }
+  .benefits li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 600;
+  }
   .embed {
     position: relative;
     width: 100%;

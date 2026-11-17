@@ -15,15 +15,39 @@ the layout code to update the site.
 
 | What you want to change | File |
 | --- | --- |
-| Chapter email, interest form link, socials, sponsor package link, homepage stats, tagline | `src/data/site.json` |
+| Chapter email, interest form link, socials, sponsor package link, homepage stats, tagline, hero photo, photo collage, sponsor page ("where your support goes", "what sponsors get") | `src/data/site.json` |
 | Team members (name, role, major, grad year, headshot, LinkedIn) | `src/data/people.json` |
-| Committees on the Join page | `src/data/committees.json` |
+| Committees on the Join page (each can have a `photo`) | `src/data/committees.json` |
 | "What a week looks like" on the Join page | `src/data/dayToDay.json` |
-| Past bridges (one file per bridge) | `src/content/projects/*.md` |
+| Past bridges (one file per bridge, shown at `/bridges`) | `src/content/projects/*.md` |
+
+### Things the site hides until they're filled in
+
+- Any link in `site.json` that is empty or still contains `REPLACE_ME` (interest form,
+  socials) is hidden instead of showing up broken. Until the interest form is set, the
+  Join page buttons email the chapter instead.
+- Homepage stats with a value of `"0"` are hidden.
+- `heroImage` empty: the homepage hero shows a dark navy background instead of a photo.
+- `joinCutout` empty: nothing shows beside the Join page headline.
+
+### Hero photo
+
+Use a wide, candid photo (at least 2000px wide) with the subject in the lower or middle
+part of the frame, since the headline sits over the bottom left. Put it in
+`public/images/` and set `heroImage` in `site.json`, e.g. `"/images/hero.jpg"`.
+
+### Cutouts (sticker-style photos)
+
+Remove the background from a photo (remove.bg or Canva's background remover), export it as
+a transparent `.png`, and put it in `public/images/`. Any `.png` headshot in `people.json`
+automatically shows as a sticker instead of a framed square. Set `joinCutout` in
+`site.json` to put a cutout next to the Join page headline.
 
 ### Adding a person
 
-1. Put their headshot in `public/images/people/` (square, ~600×600px, `.jpg`).
+1. Put their headshot in `public/images/people/` (square, ~600×600px). Use the same
+   crop for everyone: head and shoulders, eyes about a third of the way down. Use `.jpg`
+   for a normal photo or a transparent `.png` for a cutout sticker.
 2. Add an entry to `src/data/people.json`:
 
    ```json
@@ -78,8 +102,9 @@ Then open the address it prints (http://localhost:4321/).
 src/
   data/          site-wide content (JSON)
   content/       past bridges (Markdown)
-  pages/         one file per page (index, join, people, sponsor, projects)
-  components/    Nav, Footer, Photo, PersonCard
+  pages/         one file per page (index, join, people, sponsor, bridges)
+                 pages/projects/ only forwards old /projects links to /bridges
+  components/    Nav, Footer, Photo, PersonCard, Cutout
   layouts/       shared page shell
   styles/        global.css (colors, fonts, buttons)
 public/          images and files served as-is
@@ -92,3 +117,15 @@ repo is named exactly `eia-washington.github.io` inside the `eia-washington` org
 Renaming the repo or the org moves the site. If that happens, or a custom domain is
 added, update `site` and `base` in `astro.config.mjs`. All internal links go through
 `url()` in `src/lib/url.ts`, so nothing else needs to change.
+
+## Before launch checklist
+
+- [ ] Replace the example bridge in `src/content/projects/` (title, community, quotes, travelers, photos).
+- [ ] Replace the placeholder people in `src/data/people.json`.
+- [ ] Set `interestFormUrl` and the three social links in `src/data/site.json`.
+- [ ] Set real homepage `stats`, or leave them at `"0"` to keep them hidden.
+- [ ] Add `heroImage`, `gallery` photos, and committee photos.
+- [ ] Fill in `share` for each item in `sponsorUses` (e.g. "about 60% of a bridge budget") once the numbers are known.
+- [ ] Confirm the sponsor benefits in `sponsorBenefits` match the sponsorship package (logo on shirts? tax receipts through EIA national?).
+- [ ] Confirm the mission paragraph (`purpose`) matches how EIA national describes partner communities.
+- [ ] Confirm `eiauw@uw.edu` is the public contact (the GitHub org uses uweiabridge@gmail.com).
