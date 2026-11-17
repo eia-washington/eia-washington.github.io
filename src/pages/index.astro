@@ -17,22 +17,33 @@ const galleryTilts = [-3, 2, -1.5, 2.5, -2];
 const when = latest?.data.date.toLocaleDateString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' });
 ---
 
-<Base>
-  <!-- HERO: the headline over a sketch of a footbridge. If heroImage is set in site.json,
-       the photo fills the hero and the sketch is drawn over it in light ink. -->
-  <section class:list={['hero', { 'has-photo': site.heroImage }]}>
+<Base revealNav>
+  <!-- HERO: a full-screen photo (heroImage in site.json) with the headline over it.
+       The site header stays hidden until the visitor scrolls. -->
+  <section class:list={['hero', { 'no-photo': !site.heroImage }]}>
     {site.heroImage && <img class="hero-img" src={url(site.heroImage)} alt={site.heroImageAlt} />}
-    <div class="wrap hero-inner">
+    <p class="hero-mark">
+      <span class="hero-mark-name">Engineers in Action</span>
+      <span class="hero-mark-chapter">University of Washington</span>
+    </p>
+    <div class="hero-bottom">
       <h1>Bridges that get people there.</h1>
-      <p class="hero-lede">{site.tagline}</p>
-      <div class="actions">
-        <a class="btn" href={url('/sponsor')}>Sponsor a bridge</a>
-        <a class="text-link" href={url('/join')}>Join the team</a>
-        <a class="text-link" href={url('/bridges')}>See past bridges</a>
+      <div class="hero-links">
+        <a href={url('/sponsor')}>Sponsor us</a>
+        <a href={url('/join')}>Join the team</a>
+        <a href={url('/bridges')}>Past bridges</a>
       </div>
+      <a class="hero-scroll" href="#intro">Scroll down</a>
     </div>
-    <div class="wrap hero-drawing">
-      <BridgeDrawing span={latest?.data.spanMeters} />
+  </section>
+
+  <!-- INTRO: tagline and the bridge sketch, which draws itself when it scrolls into view -->
+  <section id="intro" class="intro">
+    <div class="wrap">
+      <p class="intro-lede">{site.tagline}</p>
+      <div class="intro-drawing">
+        <BridgeDrawing span={latest?.data.spanMeters} />
+      </div>
     </div>
   </section>
 
@@ -137,17 +148,19 @@ const when = latest?.data.date.toLocaleDateString('en-US', { month: 'long', year
   /* Hero */
   .hero {
     position: relative;
-    padding: clamp(56px, 10vw, 120px) 0 clamp(32px, 5vw, 56px);
+    height: 100vh;
+    height: 100svh;
+    min-height: 520px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    padding: 28px var(--gutter) 32px;
+    color: var(--paper);
     overflow: hidden;
     isolation: isolate;
   }
-  .hero h1 { max-width: 11ch; }
-  .hero-lede { font-size: var(--step-1); line-height: 1.5; color: var(--steel); max-width: 46ch; margin: 20px 0 0; }
-  .hero-drawing { margin-top: clamp(32px, 6vw, 64px); color: var(--ink); }
-
-  .hero.has-photo h1, .hero.has-photo .hero-lede, .hero.has-photo .text-link,
-  .hero.has-photo .hero-drawing { color: var(--paper); }
-  .hero.has-photo .btn { background: var(--yellow); color: var(--ink); }
   .hero-img {
     position: absolute;
     inset: 0;
@@ -156,13 +169,44 @@ const when = latest?.data.date.toLocaleDateString('en-US', { month: 'long', year
     object-fit: cover;
     z-index: -2;
   }
-  .hero.has-photo::before {
+  .hero::before {
     content: '';
     position: absolute;
     inset: 0;
     z-index: -1;
-    background: linear-gradient(180deg, rgba(22, 50, 74, 0.35), rgba(22, 50, 74, 0.75));
+    background: linear-gradient(180deg, rgba(22, 50, 74, 0.35) 0%, rgba(22, 50, 74, 0) 30%, rgba(22, 50, 74, 0) 50%, rgba(22, 50, 74, 0.7) 100%);
   }
+  /* Until a hero photo exists: dark river blue with a faint diagonal texture. */
+  .hero.no-photo { background: var(--ink); }
+  .hero.no-photo::before {
+    background: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.03) 0 14px, transparent 14px 28px);
+  }
+  .hero-mark { display: flex; flex-direction: column; align-items: center; margin: 0; max-width: none; }
+  .hero-mark-name { font-family: var(--font-display); font-size: 1.5rem; letter-spacing: -0.01em; }
+  .hero-mark-chapter { font-family: var(--font-hand); font-size: 1rem; opacity: 0.85; }
+  .hero-bottom { display: flex; flex-direction: column; align-items: center; }
+  .hero h1 { color: var(--paper); max-width: 14ch; margin-bottom: 0.35em; }
+  .hero-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 28px; }
+  .hero-links a, .hero-scroll { color: var(--paper); font-weight: 500; }
+  .hero-links a:hover, .hero-scroll:hover { background: none; color: var(--yellow); }
+  .hero-scroll {
+    margin-top: 36px;
+    font-family: var(--font-hand);
+    font-weight: 400;
+    font-size: 1.05rem;
+    text-decoration: none;
+  }
+
+  /* Intro */
+  .intro { scroll-margin-top: 64px; }
+  .intro-lede {
+    font-family: var(--font-display);
+    font-size: var(--step-3);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    max-width: 26ch;
+  }
+  .intro-drawing { margin-top: clamp(40px, 7vw, 80px); }
 
   /* Purpose */
   #purpose h2 { max-width: 14ch; }

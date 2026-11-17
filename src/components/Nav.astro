@@ -9,9 +9,10 @@ const links = [
   { href: '/sponsor', label: 'Sponsor', cta: true },
 ];
 const current = Astro.url.pathname.replace(/\/$/, '');
+const { reveal = false } = Astro.props as { reveal?: boolean };
 ---
 
-<header class="nav">
+<header class:list={['nav', { reveal }]}>
   <div class="wrap nav-inner">
     <a class="brand" href={url('/')}>
       <span class="brand-mark">EIA</span>
@@ -40,6 +41,23 @@ const current = Astro.url.pathname.replace(/\/$/, '');
   </div>
 </header>
 
+{
+  reveal && (
+    <script is:inline>
+      (() => {
+        // Home page: the header stays hidden over the full-screen photo and slides in
+        // once the visitor starts scrolling. Without JavaScript it is simply always shown.
+        const nav = document.querySelector('.nav.reveal');
+        if (!nav) return;
+        const update = () => nav.classList.toggle('is-hidden', window.scrollY < 60);
+        update();
+        window.addEventListener('scroll', update, { passive: true });
+        nav.addEventListener('focusin', () => nav.classList.remove('is-hidden'));
+      })();
+    </script>
+  )
+}
+
 <style>
   .nav {
     position: sticky;
@@ -48,6 +66,14 @@ const current = Astro.url.pathname.replace(/\/$/, '');
     background: var(--paper);
     border-bottom: 1px solid var(--line);
   }
+  /* Home page: float over the hero instead of taking space above it. */
+  .nav.reveal {
+    position: fixed;
+    left: 0;
+    right: 0;
+    transition: transform 0.3s ease;
+  }
+  .nav.reveal.is-hidden { transform: translateY(-100%); }
   .nav-inner {
     display: flex;
     align-items: center;
