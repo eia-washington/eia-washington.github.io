@@ -3,7 +3,7 @@
 The website for Engineers in Action, University of Washington Chapter. Built with
 [Astro](https://astro.build) and hosted free on GitHub Pages.
 
-Live site: https://eia-washington.github.io/eia-uw.github.io/
+Live site: https://eia-washington.github.io/
 
 Every push to `main` rebuilds and publishes the site automatically (about 1–2 minutes).
 You can watch it under the repo's **Actions** tab.
@@ -70,7 +70,7 @@ npm install
 npm run dev
 ```
 
-Then open the address it prints (http://localhost:4321/eia-uw.github.io/).
+Then open the address it prints (http://localhost:4321/).
 
 ## Project layout
 
@@ -87,7 +87,8 @@ public/          images and files served as-is
 
 ## URL / repo name
 
-Because the repo is `eia-washington/eia-uw.github.io`, GitHub serves it under
-`/eia-uw.github.io/`. If the repo is renamed to `eia-washington.github.io` or a custom
-domain is added, change `site` and `base` in `astro.config.mjs` (set `base` to `'/'`).
-All internal links go through `url()` in `src/lib/url.ts`, so nothing else needs to change.
+The site is served at the root (`https://eia-washington.github.io/`) only because the
+repo is named exactly `eia-washington.github.io` inside the `eia-washington` org.
+Renaming the repo or the org moves the site. If that happens, or a custom domain is
+added, update `site` and `base` in `astro.config.mjs`. All internal links go through
+`url()` in `src/lib/url.ts`, so nothing else needs to change.
